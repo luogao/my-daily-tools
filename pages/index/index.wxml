@@ -2,17 +2,21 @@
 <view class="container">
   <!-- not-finish -->
   <view bindtap="bindViewTap" hover-class="my-hover-class" hover-stay-time="50" class='list-item not-finish' wx:if="{{item.status === 0}}" wx:for="{{listData}}" wx:key wx:for-item="item">
-    <view>
+    <view class='item-dateinfo'>
       <text class='item-date'>{{item.date}}</text>
+      <text class='item-deadline' wx:if="{{item.deadline}}">To {{item.deadline}}</text>
     </view>
     <text class='item-title'>{{item.title}}</text>
     <text class='item-summary'>{{item.remark}}</text>
   </view>
   <!-- finish -->
   <view bindtap="bindViewTap" hover-class="my-hover-class" class='list-item finish' hover-stay-time="50" wx:if="{{item.status === 1}}" wx:for="{{listData}}" wx:key wx:for-item="item">
-    <text class='item-date'>{{item.date}}</text>
+    <view class='item-dateinfo'>
+      <text class='item-date'>{{item.date}}</text>
+      <text class='item-deadline' wx:if="{{item.deadline}}">To {{item.deadline}}</text>
+    </view>
     <text class='item-title'>{{item.title}}</text>
     <text class='item-summary'>{{item.remark}}</text>
   </view>
-    <button size="mini" hover-class="my-hover-class">新建</button>
+  <button size="mini" plain class='create-btn'>新建</button>
 </view>

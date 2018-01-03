@@ -1,0 +1,25 @@
+<view class='container'>
+  <view class="action-form">
+    <view class='form-item for-title'>
+      <text>标题</text>
+      <input/>
+    </view>
+    <view class='form-item for-deadline'>
+      <text>截止时间</text>
+      <picker mode="date" value="{{deadline}}" start="2018-01-03" bindchange="bindDateChange">
+        <view class="picker">
+          {{deadline?deadline : '请选择'}}
+        </view>
+      </picker>
+    </view>
+    <view class='form-item for-status'>
+      <text>{{status?'完成':'未完成'}}</text>
+      <switch value="{{status}}" bindchange="statusChange" />
+    </view>
+    <view class='form-item for-remark'>
+      <text>备注</text>
+      <textarea bindblur="bindTextAreaBlur" auto-height/>
+    </view>
+    <button size="mini" plain class='done-btn'>保存</button>
+  </view>
+</view>
