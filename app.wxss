@@ -1,0 +1,67 @@
+/**app.wxss**/
+
+.container {
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.list-item {
+  width: calc(100%);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  box-shadow: 2px 8px 20px 0 rgba(31, 32, 68, 0.25);
+  transition: all 0.1s;
+}
+
+.list-item.finish {
+  border-top: 5px solid #63d47a;
+}
+
+.list-item.not-finish {
+  border-top: 5px solid rgba(114, 16, 40, 0.7);
+}
+
+.list-item .item-title {
+  padding-bottom: 5px;
+}
+
+.list-item .item-date, .list-item .item-title {
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.list-item .item-date {
+  font-size: 12px;
+  color: #ccc;
+}
+
+.list-item .item-summary {
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #888;
+}
+
+.my-hover-class {
+  background: rgba(0, 0, 0, 0.1);
+  transition: all 0.1s;
+}
+
+button {
+  position: fixed;
+  bottom: 30px;
+  background: #63d47a;
+  color: #fff;
+  width: 100px;
+  box-shadow: 2px 8px 20px 0 rgba(31, 32, 68, 0.25);
+}
