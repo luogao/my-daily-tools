@@ -1,22 +1,24 @@
 <!--index.wxml-->
 <view class="container">
-  <!-- not-finish -->
-  <view bindtap="bindViewTap" hover-class="my-hover-class" hover-stay-time="50" class='list-item not-finish' wx:if="{{item.status === 0}}" wx:for="{{listData}}" wx:key wx:for-item="item">
-    <view class='item-dateinfo'>
-      <text class='item-date'>{{item.date}}</text>
-      <text class='item-deadline' wx:if="{{item.deadline}}">To {{item.deadline}}</text>
+  <view class="list-item-wrap" wx:for="{{listData}}" wx:key wx:for-item="item">
+    <view class="label-1">
+      <label>
+        <checkbox hidden value="" checked="{{item.checked}}"></checkbox>
+        <view class="label-1__icon">
+          <view class="label-1__icon-checked" style="opacity:{{item.checked ? 1: 0}}"></view>
+        </view>
+        <text class="label-1__text">{{item.value}}</text>
+      </label>
     </view>
-    <text class='item-title'>{{item.title}}</text>
-    <text class='item-summary'>{{item.remark}}</text>
-  </view>
-  <!-- finish -->
-  <view bindtap="bindViewTap" hover-class="my-hover-class" class='list-item finish' hover-stay-time="50" wx:if="{{item.status === 1}}" wx:for="{{listData}}" wx:key wx:for-item="item">
-    <view class='item-dateinfo'>
-      <text class='item-date'>{{item.date}}</text>
-      <text class='item-deadline' wx:if="{{item.deadline}}">To {{item.deadline}}</text>
+    <view catchtap="bindViewTap" data-uid="{{item.uId}}" hover-class="my-hover-class" hover-stay-time="50" class="{{item.isFinished? ' list-item finish ':'list-item not-finish '}}">
+      <view class='item-dateinfo'>
+        <text class='item-date'>{{item.createAt}}</text>
+        <text class='item-deadline' wx:if="{{item.deadline}}">{{item.deadline?'To '+ item.deadline : ''}}</text>
+      </view>
+      <text class='item-title'>{{item.title}}</text>
+      <text class='item-summary'>{{item.remarks?item.remarks:'无'}}</text>
     </view>
-    <text class='item-title'>{{item.title}}</text>
-    <text class='item-summary'>{{item.remark}}</text>
   </view>
-  <button size="mini" plain class='create-btn'>新建</button>
+
+  <button bindtap="createNew" size="mini" plain class='create-btn'>新建</button>
 </view>

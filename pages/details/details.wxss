@@ -6,7 +6,8 @@
 .action-form .form-item {
   padding: 10px;
 }
-.action-form .form-item text{
+
+.action-form .form-item>text {
   font-size: 14px;
   border-bottom: solid 1px #999;
   margin-bottom: 10px;
@@ -18,28 +19,49 @@
   margin-bottom: 10px;
 }
 
-.form-item.for-title input{
+.form-item.for-title input {
+  height: 36px;
 }
-.form-item input, .picker,textarea{
+
+.form-item input, .picker, .form-item textarea {
   font-size: 24px;
 }
-
-
-.form-item.for-deadline {
-  border: none;
+.details-item{
+  font-size: 24px;
+}
+.details-item.details-title{
+  height: 36px;
+}
+.details-item.picker{
+  padding: 0;
 }
 
 .form-item.for-remark textarea {
   width: 100%;
 }
-.for-status switch{
-display: block;
+
+.for-status switch {
+  display: block;
 }
 
-button.done-btn{
+button.done-btn {
   position: fixed;
   bottom: 30px;
   background: #63d47a;
+  color: #fff;
+  width: 145px;
+  height: 45px;
+  right: 20px;
+  line-height: 45px;
+  font-size: 18px;
+  border: 0px;
+  box-shadow: 2px 8px 20px 0 rgba(31, 32, 68, 0.25);
+}
+
+button.delete-btn {
+  position: fixed;
+  bottom: 30px;
+  background: #ff0302;
   color: #fff;
   width: 145px;
   height: 45px;

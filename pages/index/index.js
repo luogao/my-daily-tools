@@ -1,41 +1,71 @@
 //index.js
 //获取应用实例
 const app = getApp()
+const util = require('../../utils/util.js')
 
 Page({
   data: {
-    motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    listData: [{
-      title: '这是一个待办',
-      date: '2018-01-03',
-      remark: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.',
-      deadline: '2018-01-04',
-      status: 0 // 0 -> not finish; 1 -> finished
-    }, {
-      title: '这是一个待办',
-      date: '2018-01-03',
-      remark: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.',
-      deadline: '2018-01-04',
-      status: 0 // 0 -> not finish; 1 -> finished
-    },
-    {
-      title: '这是一个待办',
-      date: '2018-01-03',
-      remark: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.',
-      deadline: '2018-01-04',
-      status: 1 // 0 -> not finish; 1 -> finished
-    }]
+    listData: []
   },
   //事件处理函数
-  bindViewTap: function () {
+  bindViewTap: function (e) {
+    console.log(e.currentTarget.dataset.uid)
     wx.navigateTo({
-      url: '../logs/logs'
+      url: `../details/details?id=${e.currentTarget.dataset.uid}`
     })
   },
+  fetchData(cb) {
+    wx.showLoading({
+      title: "加载中...",
+      mask: true,
+    })
+    let fullData = wx.getStorageSync('todolist') || []
+    fullData.forEach(el => {
+      el.createAt = util.formatTime(new Date(el.createAt))
+      el.deadline = el.deadline ? el.deadline.replace(/-/g, '/') : null
+      el.checked = false
+      
+    })
+    let processedData = fullData.map(el=>{
+      el.createAt = util.formatTime(new Date(el.createAt))
+      el.deadline = el.deadline ? el.deadline.replace(/-/g, '/') : null
+      el.checked = false
+      return el
+    })
+    console.log(processedData)
+    this.setData({
+      listData: processedData
+    })
+    wx.hideLoading()
+    if (typeof cb === "function") {
+      cb()
+    }
+  },
+  // onPullDownRefresh() {
+  //   let self = this 
+  //   wx.showNavigationBarLoading()
+  //   util.Store.fetch((data) => {
+  //     let fullData = data.data
+  //     fullData.forEach(el => {
+  //       el.createAt = util.formatTime(new Date(el.createAt))
+  //       el.deadline = el.deadline ? el.deadline.replace(/-/g, '/') : null
+  //     })
+  //     self.setData({
+  //       listData: fullData
+  //     })
+  //     wx.hideNavigationBarLoading() //完成停止加载
+  //     wx.stopPullDownRefresh() //停止下拉刷新
+  //   })
+
+  // },
+  onShow() {
+    this.fetchData()
+  },
   onLoad: function () {
+    this.fetchData()
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -69,6 +99,11 @@ Page({
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
+    })
+  },
+  createNew() {
+    wx.navigateTo({
+      url: '../details/details?id=-1'
     })
   }
 })
