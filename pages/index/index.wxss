@@ -4,8 +4,15 @@
   box-sizing: border-box;
   justify-content: space-between;
   align-items: center;
+  animation: fadeInUp .8s;
 }
-
+.lists-container{
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  overflow: auto;
+  flex: 1;
+}
 .label-1{
   border: 1px solid #ccc;
   margin: 10px;
@@ -103,4 +110,26 @@ button.create-btn {
   right: 20px;
   border: 0px;
   box-shadow: 2px 8px 20px 0 rgba(31, 32, 68, 0.25);
+}
+
+.actions-container{
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 0 10px 10px 10px;
+}
+.actions-container button.status-toggle{
+  float: right;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }

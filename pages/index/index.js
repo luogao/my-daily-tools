@@ -8,34 +8,31 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    listData: []
+    listData: [],
+    listFilter: {
+      isFinished: false
+    }
   },
   //事件处理函数
   bindViewTap: function (e) {
-    console.log(e.currentTarget.dataset.uid)
     wx.navigateTo({
       url: `../details/details?id=${e.currentTarget.dataset.uid}`
     })
   },
+  listFilterStatus(e) {
+    let tempdata = !this.data.listFilter.isFinished
+    this.setData({
+      'listFilter.isFinished': tempdata
+    })
+  },
   fetchData(cb) {
-    wx.showLoading({
-      title: "加载中...",
-      mask: true,
-    })
     let fullData = wx.getStorageSync('todolist') || []
-    fullData.forEach(el => {
-      el.createAt = util.formatTime(new Date(el.createAt))
-      el.deadline = el.deadline ? el.deadline.replace(/-/g, '/') : null
-      el.checked = false
-      
-    })
-    let processedData = fullData.map(el=>{
+    let processedData = fullData.map(el => {
       el.createAt = util.formatTime(new Date(el.createAt))
       el.deadline = el.deadline ? el.deadline.replace(/-/g, '/') : null
       el.checked = false
       return el
     })
-    console.log(processedData)
     this.setData({
       listData: processedData
     })
@@ -59,13 +56,17 @@ Page({
   //     wx.hideNavigationBarLoading() //完成停止加载
   //     wx.stopPullDownRefresh() //停止下拉刷新
   //   })
-
   // },
   onShow() {
     this.fetchData()
   },
+  onUnload() {
+  },
   onLoad: function () {
-    this.fetchData()
+    wx.showLoading({
+      title: "加载中...",
+      mask: true,
+    })
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
