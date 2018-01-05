@@ -34,7 +34,7 @@ Page({
       return el
     })
     this.setData({
-      listData: processedData
+      listData: processedData.reverse()
     })
     wx.hideLoading()
     if (typeof cb === "function") {

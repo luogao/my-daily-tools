@@ -4,22 +4,25 @@
   box-sizing: border-box;
   justify-content: space-between;
   align-items: center;
-  animation: fadeInUp .8s;
+  animation: fadeInUp 0.8s;
+  padding: 0 10px;
 }
-.lists-container{
+
+.lists-container {
+  scroll-behavior: smooth;
   width: 100%;
   box-sizing: border-box;
-  padding: 10px;
   overflow: auto;
   flex: 1;
 }
-.label-1{
+
+.label-1 {
   border: 1px solid #ccc;
   margin: 10px;
   display: none;
 }
 
-.label-1__text{
+.label-1__text {
   display: inline-block;
   vertical-align: middle;
 }
@@ -51,7 +54,7 @@
   padding: 10px;
   margin: 10px 0;
   border-radius: 5px;
-  box-shadow: 2px 8px 20px 0 rgba(31, 32, 68, 0.25);
+  box-shadow: 0 2px 4px rgba(136, 136, 136, 0.43);
   transition: all 0.1s;
   position: relative;
 }
@@ -112,14 +115,23 @@ button.create-btn {
   box-shadow: 2px 8px 20px 0 rgba(31, 32, 68, 0.25);
 }
 
-.actions-container{
+.actions-container {
   width: 100%;
   box-sizing: border-box;
   overflow: hidden;
-  padding: 0 10px 10px 10px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(136, 136, 136, 0.43);
+  /* box-shadow: rgba(0, 0, 0, 0.14) 0px 4px 5px 0px,
+                rgba(0, 0, 0, 0.12) 0px 1px 10px 0px,
+                rgba(0, 0, 0, 0.2) 0px 2px 4px -1px; */
 }
-.actions-container button.status-toggle{
-  float: right;
+
+.actions-container button.status-toggle {
+  box-shadow: 0 2px 4px rgba(136, 136, 136, 0.43);
+  color: #fff;
+  background: #909399;
+  border: none;
+  float: left;
 }
 
 @keyframes fadeInUp {
