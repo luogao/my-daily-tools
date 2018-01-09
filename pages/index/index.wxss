@@ -134,6 +134,18 @@ button.create-btn {
   float: left;
 }
 
+.actions-container button.location-btn {
+  box-shadow: 0 2px 4px rgba(136, 136, 136, 0.43);
+  color: #fff;
+  background: #909399;
+  border: none;
+  float: left;
+}
+.actions-container button:not(:first-child){
+  margin-left: 10px;
+}
+
+
 @keyframes fadeInUp {
   from {
     opacity: 0;

@@ -11,7 +11,8 @@ Page({
     listData: [],
     listFilter: {
       isFinished: false
-    }
+    },
+    curLocation:null
   },
   //事件处理函数
   bindViewTap: function (e) {
@@ -60,9 +61,22 @@ Page({
   onShow() {
     this.fetchData()
   },
+  getLocation(){
+    let self = this
+    wx.chooseLocation({
+      success(res){
+        console.log(res.name)
+        console.log(res.address)
+        self.setData({
+          curLocation: res.name
+        })
+      }
+    })
+  },
   onUnload() {
   },
   onLoad: function () {
+    
     wx.showLoading({
       title: "加载中...",
       mask: true,

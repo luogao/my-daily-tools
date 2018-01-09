@@ -4,6 +4,9 @@
     <button catchtap="listFilterStatus" data-filter="isFinished" class='status-toggle' size="mini" plain>
       {{listFilter.isFinished?'已完成':'待完成'}}
     </button>
+    <button class='location-btn' plain catchtap="getLocation" size="mini">
+      {{curLocation?curLocation:'获取位置'}}
+    </button>
   </view>
   <scroll-view scroll-y="true" class='lists-container'>
     <view class="list-item-wrap" wx:if="{{item.isFinished === listFilter.isFinished}}" wx:for="{{listData}}" wx:key wx:for-item="item">
