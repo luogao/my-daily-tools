@@ -2,7 +2,7 @@
   <view class="action-form">
     <view class='form-item for-title'>
       <text>标题</text>
-      <input bindblur="bindTitleBlur"  bindconfirm="bindTitleBlur" focus="{{titleFormFocus}}" value="{{editValue.title}}" wx:if="{{!itemValue.title}}" />
+      <input catchblur="bindTitleBlur" catchconfirm="bindTitleBlur" focus="{{titleFormFocus}}" value="{{editValue.title}}" wx:if="{{!itemValue.title}}" />
       <view class='details-item details-title' wx:else bindtap="editItemTitle" hover-class="my-hover-class" hover-stay-time="50">
         <text>{{itemValue.title}}</text>
       </view>
@@ -21,7 +21,7 @@
     </view>
     <view class='form-item for-remark'>
       <text>备注</text>
-      <textarea focus="{{remarksFormFocus}}" bindblur="bindTextAreaBlur" bindconfirm="bindTextAreaBlur" value="{{editValue.remarks}}" auto-height wx:if="{{!itemValue.remarks}}"/>
+      <textarea focus="{{remarksFormFocus}}" catchblur="bindTextAreaBlur" catchconfirm="bindTextAreaBlur" value="{{editValue.remarks}}" auto-height wx:if="{{!itemValue.remarks}}" />
       <view class='details-item' wx:else bindtap="editItemRemarks" hover-class="my-hover-class" hover-stay-time="50">
         <text class='details-remark'>{{itemValue.remarks}}</text>
       </view>
