@@ -30,6 +30,7 @@ Page({
     let fullData = wx.getStorageSync('todolist') || []
     let processedData = fullData.map(el => {
       el.createAt = util.formatTime(new Date(el.createAt))
+      el.finishAt = el.finishAt?util.formatTime(new Date(el.finishAt)):null
       el.deadline = el.deadline ? el.deadline.replace(/-/g, '/') : null
       el.checked = false
       return el

@@ -22,7 +22,8 @@
       <view catchtap="bindViewTap" data-uid="{{item.uId}}" hover-class="my-hover-class" hover-stay-time="50" class="{{item.isFinished? ' list-item finish ':'list-item not-finish '}}">
         <view class='item-dateinfo'>
           <text class='item-date'>{{item.createAt}}</text>
-          <text class='item-deadline' wx:if="{{item.deadline}}">{{item.deadline?'To '+ item.deadline : ''}}</text>
+          <text class='item-deadline' wx:if="{{item.isFinished && item.finishAt}}">完成于:{{item.finishAt}}</text>
+          <text class='item-deadline' wx:if="{{!item.isFinished}}">{{item.deadline?'To '+ item.deadline : ''}}</text>
         </view>
         <text class='item-title'>{{item.title}}</text>
         <text class='item-summary'>{{item.remarks?item.remarks:'无'}}</text>

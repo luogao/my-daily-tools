@@ -16,7 +16,8 @@ Page({
       isFinished: false,
       remarks: null,
       uId: null,
-      createAt: null
+      createAt: null,
+      finishAt: null
     },
     editValue: {
       title: null,
@@ -99,6 +100,9 @@ Page({
   },
   statusChange: function (e) {
     this.editItem("isFinished", e.detail.value)
+    if (e.detail.value) {
+      this.editItem("finishAt", Date.now())
+    }
     this.setData({
       "itemValue.isFinished": e.detail.value
     })
