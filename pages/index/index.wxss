@@ -81,7 +81,7 @@
 }
 
 .list-item .item-deadline {
-  font-size: 14px;
+  font-size: 12px;
   color: #000;
 }
 

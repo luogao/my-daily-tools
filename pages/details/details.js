@@ -92,12 +92,14 @@ Page({
       }
     }
   },
+  //时间更改，保存、修改
   bindDateChange: function (e) {
     this.editItem("deadline", e.detail.value)
     this.setData({
       "itemValue.deadline": e.detail.value
     })
   },
+  //完成状态修改
   statusChange: function (e) {
     this.editItem("isFinished", e.detail.value)
     if (e.detail.value) {
@@ -107,6 +109,7 @@ Page({
       "itemValue.isFinished": e.detail.value
     })
   },
+  // Title绑定失焦事件 保存/编辑
   bindTitleBlur: function (e) {
     this.editItem("title", e.detail.value)
     this.setData({
@@ -114,6 +117,7 @@ Page({
       "editValue.title": null
     })
   },
+  // Remark绑定失焦事件 保存/编辑
   bindTextAreaBlur: function (e) {
     this.editItem("remarks", e.detail.value)
     this.setData({
@@ -121,6 +125,7 @@ Page({
       "editValue.remarks": null
     })
   },
+  //Title点击text元素开始出现表单元素开始编辑
   editItemTitle: function (e) {
     this.setData({
       "editValue.title": this.data.itemValue.title,
@@ -128,6 +133,7 @@ Page({
       titleFormFocus: true
     })
   },
+  //Remark点击text元素开始出现表单元素开始编辑
   editItemRemarks: function (e) {
     this.setData({
       "editValue.remarks": this.data.itemValue.remarks,
