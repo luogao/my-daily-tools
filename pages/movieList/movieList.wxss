@@ -1,30 +1,39 @@
 /* pages/movieList/movieList.wxss */
 
+.section-title {
+  padding-left: 4%;
+  padding-bottom: 30px;
+  font-size: 36px;
+  font-weight: 100;
+}
+
 .movie-list-container {
   padding-left: 2%;
   padding-right: 2%;
   box-sizing: border-box;
-  padding-top: 30px;
 }
 
 .movie-item {
   box-sizing: border-box;
   float: left;
-  width: calc(100% / 3);
+  width: 50%;
   padding-left: 4%;
   padding-right: 4%;
   margin-bottom: 20px;
+  position: relative;
 }
 
 .movie-item image {
-  height: 140px;
-  border-radius: 5px;
+  height: 240px;
   width: 100%;
+  box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.6);
+  transition: all 0.1s;
 }
 
 .movie-item .item-info .item-name {
-  text-align: center;
-  font-size: 14px;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 200;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -34,20 +43,35 @@
 }
 
 .movie-item .item-info .item-score {
-  color: #E4A813;
-  width: 100%;
+  color: #fff;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 50%;
+  background: #e4a813;
   text-align: center;
+  font-size: 14px;
+  font-weight: 100;
+  position: absolute;
+  right: 2px;
+  bottom:55px;
+  box-shadow: 0 2px 5px rgba(0,0,0,.3);
+}
+.movie-item .item-info .item-actors{
+     color: #888;
+  width: 100%;
+  text-align: left;
   font-size: 12px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  font-weight: 600;
-}
-.movie-item .item-info .item-score::before{
-  color: #888;
-  content: '评分';
-  font-weight: 500;
-  padding-right:5px; 
+  font-weight: 100;
+ }
+
+
+.movie-item-hover image {
+  box-shadow: none;
+  transition: all 0.1s;
 }

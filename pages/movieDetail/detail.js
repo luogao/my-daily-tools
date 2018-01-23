@@ -1,17 +1,14 @@
-// pages/movieList/movieList.js
+// pages/movieDetail/detail.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    baseUrl: 'https://api-m.mtime.cn/',//时光网Api
-    locationID: '292',//上海
-    listData: null,
-    subUrl: 'Showtime/LocationMovies.api?'
-    //PageSubArea/HotPlayMovies.api? //正在售票
-    //Showtime/LocationMovies.api? //正在热映
-    //Movie/MovieComingNew.api? //即将上映
+    baseUrl: 'https://ticket-api-m.mtime.cn/',
+    locationID: '292',
+    detailData: null,
+    subUrl1: 'movie/detail.api?'
   },
 
   /**
@@ -23,24 +20,27 @@ Page({
       title: "加载中...",
       mask: true,
     })
-    self.getMovieList(self.data.subUrl, self.data.locationID).then(res => {
+    self.getMovieData(self.data.subUrl1, self.data.locationID, options.id).then(res => {
       wx.hideLoading()
       console.log(res.data)
       self.setData({
-        listData: res.data.ms
+        detailData: res
+      })
+    }).catch((err)=>{
+      wx.hideLoading()
+      wx.showToast({
+        title: '出错啦！',
+        icon: 'loading',
+        duration: 500,
+        success:function(){
+          
+        }
       })
     })
   },
-  //跳转到电影详情页
-  gotoDetailPage: function (e) {
-    wx.navigateTo({
-      url: `../movieDetail/detail?id=${e.currentTarget.dataset.id}`
-    })
-  },
-  //获取电影列表
-  getMovieList(url, location) {
+  getMovieData(url, location, movieID) {
     let self = this
-    let _url = `${self.data.baseUrl}${url}locationId=${location}`
+    let _url = `${self.data.baseUrl}${url}locationId=${location}&movieId=${movieID}`
     return new Promise((resolve, reject) => {
       wx.request({
         url: _url,

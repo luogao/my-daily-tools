@@ -1,10 +1,14 @@
 <!--pages/movieList/movieList.wxml-->
 <scroll-view class='movie-list-container'>
-  <view class='movie-item' wx:for="{{listData}}" wx:key wx:for-item="item">
+  <view class='section-title'>
+      正在热映
+  </view>
+  <view catchtap='gotoDetailPage' data-id='{{item.id}}' class='movie-item' wx:for="{{listData}}" wx:key wx:for-item="item" hover-class="movie-item-hover" hover-stay-time="50">
     <image src="{{item.img}}" mode='aspectFill' lazy-load="true"></image>
     <view class='item-info'>
       <text class='item-name'>{{item.t}}</text>
-      <text class='item-score'>{{item.r == '-1'?"暂无":item.r}}</text>
+      <text class='item-score'>{{item.r == '-1'?"无":item.r}}</text>
+      <text class='item-actors'>{{item.aN1}}, {{item.aN2}}</text>
     </view>
   </view>
 </scroll-view>
