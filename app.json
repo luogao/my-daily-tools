@@ -1,12 +1,13 @@
 {
-  "pages":[
+  "pages": [
+    "pages/movieList/movieList",
     "pages/index/index",
     "pages/details/details"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "日常工具",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   }
 }

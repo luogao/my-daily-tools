@@ -1,0 +1,10 @@
+<!--pages/movieList/movieList.wxml-->
+<scroll-view class='movie-list-container'>
+  <view class='movie-item' wx:for="{{listData}}" wx:key wx:for-item="item">
+    <image src="{{item.img}}" mode='aspectFill' lazy-load="true"></image>
+    <view class='item-info'>
+      <text class='item-name'>{{item.t}}</text>
+      <text class='item-score'>{{item.r == '-1'?"暂无":item.r}}</text>
+    </view>
+  </view>
+</scroll-view>

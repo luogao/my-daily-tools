@@ -1,0 +1,53 @@
+/* pages/movieList/movieList.wxss */
+
+.movie-list-container {
+  padding-left: 2%;
+  padding-right: 2%;
+  box-sizing: border-box;
+  padding-top: 30px;
+}
+
+.movie-item {
+  box-sizing: border-box;
+  float: left;
+  width: calc(100% / 3);
+  padding-left: 4%;
+  padding-right: 4%;
+  margin-bottom: 20px;
+}
+
+.movie-item image {
+  height: 140px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.movie-item .item-info .item-name {
+  text-align: center;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.movie-item .item-info .item-score {
+  color: #E4A813;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  font-weight: 600;
+}
+.movie-item .item-info .item-score::before{
+  color: #888;
+  content: '评分';
+  font-weight: 500;
+  padding-right:5px; 
+}

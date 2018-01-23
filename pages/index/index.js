@@ -74,6 +74,12 @@ Page({
       }
     })
   },
+  getMovie(){
+    let self = this
+    wx.navigateTo({
+      url: `../movieList/movieList`
+    })
+  },
   onUnload() {
   },
   onLoad: function () {
