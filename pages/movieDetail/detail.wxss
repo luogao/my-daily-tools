@@ -1,1 +1,16 @@
 /* pages/movieDetail/detail.wxss */
+
+.movie-detail-container{
+
+}
+.movie-bigimg{
+  padding: 30px;
+  background: #00204A;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.movie-bigimg image{
+  width: 50%;
+}

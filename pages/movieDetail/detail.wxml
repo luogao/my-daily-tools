@@ -1,5 +1,6 @@
 <!--pages/movieDetail/detail.wxml-->
-<text>pages/movieDetail/detail.wxml</text>
 <view class='movie-detail-container'>
-  
+  <view class='movie-bigimg'>
+    <image src="{{detailData.basic.bigImage}}" mode='widthFix'></image>
+  </view>
 </view>

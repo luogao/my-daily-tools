@@ -15,16 +15,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.setNavigationBarColor({
+      frontColor: '#ffffff',
+      backgroundColor: '#00204A',
+      animation: {
+        duration: 300,
+        timingFunc: 'easeIn'
+      }
+    })
     let self = this
     wx.showLoading({
       title: "加载中...",
       mask: true,
     })
-    self.getMovieData(self.data.subUrl1, self.data.locationID, options.id).then(res => {
+    self.getMovieData(self.data.subUrl1, self.data.locationID, '249736').then(res => {
       wx.hideLoading()
       console.log(res.data)
       self.setData({
-        detailData: res
+        detailData: res.data.data
       })
     }).catch((err)=>{
       wx.hideLoading()
