@@ -1,16 +1,68 @@
 /* pages/movieDetail/detail.wxss */
 
-.movie-detail-container{
+.movie-detail-container {
+}
 
+.movie-big-bg {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
 }
-.movie-bigimg{
-  padding: 30px;
-  background: #00204A;
+
+.movie-basic-info {
+}
+
+.movie-basic-info {
+  height: 50vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.movie-basic-info image {
+  width: 100%;
+}
+
+.movie-basic-info .movie-info-txt {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9;
+  padding-left: 2%;
+  padding-right: 2%;
   box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
-.movie-bigimg image{
-  width: 50%;
+
+.movie-info-txt .movie-score {
+  color: #e4a813;
+  font-size: 24px;
+}
+
+.movie-info-txt .movie-name {
+  font-size: 36px;
+  font-weight: 100;
+}
+
+
+.movie-info-txt .movie-commentSpecial {
+  font-size: 14px;
+  font-weight: 100;
+}
+
+.movie-info-txt .movie-commentSpecial::before {
+  content: '——';
+  padding-right: 5px;
+}
+
+.movie-basic-info::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 1));
+  z-index: 2;
 }
