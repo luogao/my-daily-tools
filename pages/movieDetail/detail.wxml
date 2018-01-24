@@ -1,15 +1,25 @@
 <!--pages/movieDetail/detail.wxml-->
 <view class='movie-detail-container'>
-    <view class='movie-basic-info'>
-      <image src="{{detailData.basic.img}}" mode='widthFix' class="slide-image" />
-      <view class='movie-info-txt'>
-        <view class='movie-name'>
-          {{detailData.basic.name}}
-          <text class='movie-score'>{{detailData.basic.overallRating}}</text>
-        </view>
-        <view class='movie-commentSpecial'>{{detailData.basic.commentSpecial}}</view>
+  <view class='movie-basic-info'>
+    <image src="{{detailData.basic.img}}" mode='widthFix' class="slide-image" />
+    <view class='movie-info-txt'>
+      <view>
+        <text class='movie-name'>{{detailData.basic.name}}</text>
+
       </view>
+      <view class='movie-commentSpecial' wx:if="{{detailData.basic.commentSpecial}}">{{detailData.basic.commentSpecial}}</view>
+    </view>
+  </view>
+  <view class='movie-detail-info'>
+    <view>
+      <view class='movie-showtime' wx:if="{{showDate}}">{{showDate?showDate:''}}
+        <text class='movie-area' wx:if="{{detailData.basic.releaseArea}}">({{detailData.basic.releaseArea}})</text>
+      </view>
+      <view class='movie-type' wx:if="{{detailData.basic.type}}">{{detailData.basic.type}}</view>
+      <view class='movie-time' wx:if="{{detailData.basic.mins}}">{{detailData.basic.mins}}</view>
     </view>
 
-    
+    <text class='movie-score'>{{detailData.basic.overallRating != '-1' ? detailData.basic.overallRating :'无'}}</text>
+  </view>
+
 </view>

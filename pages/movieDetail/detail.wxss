@@ -1,6 +1,10 @@
 /* pages/movieDetail/detail.wxss */
-
+body{
+  height: 100%;
+}
 .movie-detail-container {
+  height: 100%;
+  background: #000;
 }
 
 .movie-big-bg {
@@ -15,13 +19,14 @@
 }
 
 .movie-basic-info {
-  height: 50vh;
   overflow: hidden;
   position: relative;
+  background: #000;
 }
 
 .movie-basic-info image {
   width: 100%;
+  z-index: 0;
 }
 
 .movie-basic-info .movie-info-txt {
@@ -33,18 +38,21 @@
   padding-left: 2%;
   padding-right: 2%;
   box-sizing: border-box;
+  color: #fff;
 }
 
-.movie-info-txt .movie-score {
+.movie-score {
   color: #e4a813;
   font-size: 24px;
+  text-align: left;
+  padding-right: 10px;
 }
 
 .movie-info-txt .movie-name {
   font-size: 36px;
-  font-weight: 100;
+  font-weight: 400;
+  text-align: left;
 }
-
 
 .movie-info-txt .movie-commentSpecial {
   font-size: 14px;
@@ -63,6 +71,20 @@
   left: 0;
   width: 100%;
   height: 60%;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 1));
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8) 50%, rgba(0, 0, 0, 1));
   z-index: 2;
+}
+
+.movie-detail-info {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: 100;
+  color: #ccc;
+  background: #000;
+  font-size: 12px;
+  padding-left: 2%;
+  padding-right: 2%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
 }

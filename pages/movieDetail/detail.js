@@ -1,4 +1,5 @@
 // pages/movieDetail/detail.js
+const util = require('../../utils/util.js')
 Page({
 
   /**
@@ -8,33 +9,37 @@ Page({
     baseUrl: 'https://ticket-api-m.mtime.cn/',
     locationID: '292',
     detailData: null,
-    subUrl1: 'movie/detail.api?'
+    subUrl1: 'movie/detail.api?',
+    showDate:null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // wx.setNavigationBarColor({
-    //   frontColor: '#ffffff',
-    //   backgroundColor: '#00204A',
-    //   animation: {
-    //     duration: 300,
-    //     timingFunc: 'easeIn'
-    //   }
-    // })
+    wx.setNavigationBarColor({
+      frontColor: '#ffffff',
+      backgroundColor: '#000',
+      animation: {
+        duration: 300,
+        timingFunc: 'easeIn'
+      }
+    })
     let self = this
     wx.showLoading({
       title: "加载中...",
       mask: true,
     })
-    self.getMovieData(self.data.subUrl1, self.data.locationID, '249736').then(res => {
+    self.getMovieData(self.data.subUrl1, self.data.locationID, options.id).then(res => {
       wx.hideLoading()
-      console.table(res.data.data.basic)
+      console.table(res.data.data.basic.commentSpecial)
+      let _showTime = new Date(res.data.data.basic.showDay * 1000)
       self.setData({
-        detailData: res.data.data
+        detailData: res.data.data,
+        showDate: util.formatTime(_showTime)
       })
     }).catch((err)=>{
+      console.log(err)
       wx.hideLoading()
       wx.showToast({
         title: '出错啦！',
