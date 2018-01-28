@@ -12,14 +12,42 @@
   </view>
   <view class='movie-detail-info'>
     <view>
-      <view class='movie-showtime' wx:if="{{showDate}}">{{showDate?showDate:''}}
+      <view class='movie-showtime' wx:if="{{showDate}}">上映：{{showDate?showDate:''}}
         <text class='movie-area' wx:if="{{detailData.basic.releaseArea}}">({{detailData.basic.releaseArea}})</text>
       </view>
-      <view class='movie-type' wx:if="{{detailData.basic.type}}">{{detailData.basic.type}}</view>
-      <view class='movie-time' wx:if="{{detailData.basic.mins}}">{{detailData.basic.mins}}</view>
+      <view class='movie-type' wx:if="{{detailData.basic.type}}">类型：{{detailData.basic.type}}</view>
+      <view class='movie-time' wx:if="{{detailData.basic.mins}}">时长：{{detailData.basic.mins}}</view>
     </view>
-
-    <text class='movie-score'>{{detailData.basic.overallRating != '-1' ? detailData.basic.overallRating :'无'}}</text>
+    <text class='movie-score'>
+      {{detailData.basic.overallRating != '-1' ? detailData.basic.overallRating :'无'}}
+    </text>
   </view>
-
+  <view class='movie-story'>
+    <text class='section-title'>情节简述</text>
+    <text class='movie-story-text'>{{detailData.basic.story}}</text>
+  </view>
+  <view class='movie-actor'>
+    <text class='section-title'>影人</text>
+    <scroll-view scroll-x class='scroller'>
+      <view class='movier-item director'>
+        <view class='img-box'>
+          <image src="{{detailData.basic.director.img}}" class="movier-image"></image>
+        </view>
+        <text class='actor-name'>(导演){{detailData.basic.director.name?detailData.basic.director.name : '未知'}}</text>
+      </view>
+      <view class='movier-item' wx:for="{{detailData.basic.actors}}" wx:key wx:for-item="item">
+        <view class='img-box'>
+          <image src="{{item.img}}" class="movier-image"></image>
+        </view>
+        <text class='actor-name'>{{item.name?item.name : '未知'}}</text>
+      </view>
+    </scroll-view>
+  </view>
+  <view class='movie-comment'>
+    <text class='section-title'>评论</text>
+    <view class='movie-comment-item' wx:for="{{moiveComment}}" wx:key wx:for-item="item">
+      <text class='comment-rate'>{{item.rating}}</text>
+      <text class='comment-content'>{{item.content}}</text>
+    </view>
+  </view>
 </view>

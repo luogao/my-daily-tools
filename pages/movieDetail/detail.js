@@ -10,13 +10,16 @@ Page({
     locationID: '292',
     detailData: null,
     subUrl1: 'movie/detail.api?',
-    showDate:null
+    showDate: null,
+    subUrl2: 'movie/hotComment.api?',
+    moiveComment: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let self = this
     wx.setNavigationBarColor({
       frontColor: '#ffffff',
       backgroundColor: '#000',
@@ -25,35 +28,61 @@ Page({
         timingFunc: 'easeIn'
       }
     })
-    let self = this
     wx.showLoading({
       title: "加载中...",
       mask: true,
     })
-    self.getMovieData(self.data.subUrl1, self.data.locationID, options.id).then(res => {
-      wx.hideLoading()
-      console.table(res.data.data.basic.commentSpecial)
-      let _showTime = new Date(res.data.data.basic.showDay * 1000)
-      self.setData({
-        detailData: res.data.data,
-        showDate: util.formatTime(_showTime)
+    self.getMovieData(self.data.subUrl1, self.data.locationID,
+      options.id).then(res => {
+        wx.hideLoading()
+        console.table(res.data.data.basic.commentSpecial)
+        let _showTime = new Date(res.data.data.basic.showDay * 1000)
+        console.log(res.data.data.basic)
+        wx.setNavigationBarTitle({
+          title: res.data.data.basic.name
+        })
+        self.setData({
+          detailData: res.data.data,
+          showDate: util.formatTime(_showTime)
+        })
+      }).then(() => {
+        self.getMovieComment(self.data.subUrl2, options.id).then((res2) => {
+          console.log(res2.data.data.mini.list)
+          self.setData({
+            moiveComment: res2.data.data.mini.list
+          })
+        })
+      }).catch((err) => {
+        console.log(err)
+        wx.hideLoading()
+        wx.showToast({
+          title: '出错啦！',
+          icon: 'loading',
+          duration: 500,
+          success: function () {
+
+          }
+        })
       })
-    }).catch((err)=>{
-      console.log(err)
-      wx.hideLoading()
-      wx.showToast({
-        title: '出错啦！',
-        icon: 'loading',
-        duration: 500,
-        success:function(){
-          
-        }
-      })
-    })
   },
   getMovieData(url, location, movieID) {
     let self = this
     let _url = `${self.data.baseUrl}${url}locationId=${location}&movieId=${movieID}`
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: _url,
+        success: function (res) {
+          resolve(res)
+        },
+        fail: function (err) {
+          reject(err)
+        }
+      })
+    })
+  },
+  getMovieComment(url, movieID) {
+    let self = this
+    let _url = `${self.data.baseUrl}${url}&movieId=${movieID}`
     return new Promise((resolve, reject) => {
       wx.request({
         url: _url,
