@@ -2,6 +2,7 @@
 //获取应用实例
 const app = getApp()
 const util = require('../../utils/util.js')
+const AV = require('../../libs/av-weapp-min.js');
 
 Page({
   data: {
@@ -12,7 +13,7 @@ Page({
     listFilter: {
       isFinished: false
     },
-    curLocation:null
+    curLocation: null
   },
   //事件处理函数
   bindViewTap: function (e) {
@@ -30,7 +31,7 @@ Page({
     let fullData = wx.getStorageSync('todolist') || []
     let processedData = fullData.map(el => {
       el.createAt = util.formatTime(new Date(el.createAt))
-      el.finishAt = el.finishAt?util.formatTime(new Date(el.finishAt)):null
+      el.finishAt = el.finishAt ? util.formatTime(new Date(el.finishAt)) : null
       el.deadline = el.deadline ? el.deadline.replace(/-/g, '/') : null
       el.checked = false
       return el
@@ -62,10 +63,10 @@ Page({
   onShow() {
     this.fetchData()
   },
-  getLocation(){
+  getLocation() {
     let self = this
     wx.chooseLocation({
-      success(res){
+      success(res) {
         console.log(res.name)
         console.log(res.address)
         self.setData({
@@ -74,7 +75,7 @@ Page({
       }
     })
   },
-  getMovie(){
+  getMovie() {
     let self = this
     wx.navigateTo({
       url: `../movieList/movieList`
@@ -82,47 +83,50 @@ Page({
   },
   onUnload() {
   },
+  setCurrentUser() {
+    const user = AV.User.current();
+    if (user) return true
+    return false
+  },
   onLoad: function () {
     
-    wx.showLoading({
-      title: "加载中...",
-      mask: true,
-    })
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse) {
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
+    
+
+    // if (app.globalData.userInfo) {
+    //   this.setData({
+    //     userInfo: app.globalData.userInfo,
+    //     hasUserInfo: true
+    //   })
+    // } else if (this.data.canIUse) {
+    //   // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+    //   // 所以此处加入 callback 以防止这种情况
+    //   app.userInfoReadyCallback = res => {
+    //     this.setData({
+    //       userInfo: res.userInfo,
+    //       hasUserInfo: true
+    //     })
+    //   }
+    // } else {
+    //   // 在没有 open-type=getUserInfo 版本的兼容处理
+    //   wx.getUserInfo({
+    //     success: res => {
+    //       app.globalData.userInfo = res.userInfo
+    //       this.setData({
+    //         userInfo: res.userInfo,
+    //         hasUserInfo: true
+    //       })
+    //     }
+    //   })
+    // }
   },
-  getUserInfo: function (e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-  },
+  // getUserInfo: function (e) {
+  //   console.log(e)
+  //   app.globalData.userInfo = e.detail.userInfo
+  //   this.setData({
+  //     userInfo: e.detail.userInfo,
+  //     hasUserInfo: true
+  //   })
+  // },
   createNew() {
     wx.navigateTo({
       url: '../details/details?id=-1'

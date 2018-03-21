@@ -1,0 +1,14 @@
+<!--pages/home/home.wxml-->
+<view class="home">
+  <view class='page-block'>
+    <view class='userinfo-block' wx:if="{{userName}}">
+      <text>{{userName}}</text>
+      <image mode="aspectFit" src="{{avatar}}"></image>
+    </view>
+    <view class='tool-block'>
+      <view class='tool-block-item'></view>
+      <view class='tool-block-item'></view>
+      <view class='tool-block-item'></view>
+    </view>
+  </view>
+</view>

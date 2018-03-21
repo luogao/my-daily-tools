@@ -1,0 +1,39 @@
+/* pages/home/home.wxss */
+
+.home {
+  height: 100%;
+}
+
+.page-block {
+  padding: 10px 20px 0 20px;
+}
+
+.userinfo-block {
+  font-size: 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.userinfo-block image {
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.tool-block {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.tool-block-item {
+  width: 160px;
+  height: 160px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  background-color: #ccc;
+  margin-bottom: 50px;
+}
