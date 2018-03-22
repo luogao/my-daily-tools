@@ -1,0 +1,70 @@
+<style lang="scss">
+  .container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
+</style>
+
+<script>
+  import AV from 'leancloud-storage/dist/av-weapp-min.js'
+  import wepy from 'wepy'
+  import 'wepy-async-function'
+  import Promise from 'promise-polyfill'
+  export default class extends wepy.app {
+    config = {
+      pages: [
+        'pages/home'
+      ],
+      window: {
+        backgroundTextStyle: 'light',
+        navigationBarBackgroundColor: '#fff',
+        navigationBarTitleText: 'WeChat',
+        navigationBarTextStyle: 'black'
+      }
+    }
+    globalData = {
+      userInfo: null
+    }
+    constructor() {
+      super()
+      this.use('requestfix')
+      this.use('promisify')
+      var APP_ID = 'GI0O5vgXWxCU6KYs7SjBeI63-gzGzoHsz'
+      var APP_KEY = 'DdQuowYhIBniogCr0fe0W4EA'
+      AV.init({
+        appId: APP_ID,
+        appKey: APP_KEY
+      })
+    }
+    onLaunch() {
+      this.testAsync()
+    }
+    sleep(s) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve('promise resolved')
+        }, s * 1000)
+      })
+    }
+    async testAsync() {
+      const data = await this.sleep(3)
+      console.log(data)
+    }
+    getUserInfo(cb) {
+      const that = this
+      if (this.globalData.userInfo) {
+        return this.globalData.userInfo
+      }
+      wepy.getUserInfo({
+        success(res) {
+          that.globalData.userInfo = res.userInfo
+          cb && cb(res.userInfo)
+        }
+      })
+    }
+  }
+</script>

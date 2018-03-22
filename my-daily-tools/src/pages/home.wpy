@@ -1,0 +1,116 @@
+<style lang="scss">
+  .home {
+    height: 100%;
+  }
+  .page-block {
+    padding: 10px 20px 0 20px;
+  }
+  .userinfo-block {
+    font-size: 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin: 0 3%;
+  }
+  .userinfo-block image {
+    width: 66px;
+    height: 66px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  .tool-block {
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 50px 3% 0;
+  }
+  .tool-block-item {
+    width: 130px;
+    height: 130px;
+    border-radius: 8px;
+    box-shadow: 0px 10px 40px -10px rgba(0, 64, 128, 0.2);
+    margin-bottom: 50px;
+    padding: 20px;
+    box-sizing: border-box;
+    transition: all 0.3s;
+  }
+  .tool-block-item:nth-child(1) {
+    background-color: #51adcf;
+  }
+  .tool-block-item:nth-child(2) {
+    background-color: #a5ecd7;
+  }
+  .tool-block-item:nth-child(3) {
+    background-color: #2E383F;
+  }
+  .tool-block-item image {
+    width: 100%;
+    height: 100%;
+  }
+  .tool-item-hover {
+    box-shadow: none;
+  }
+</style>
+
+<template>
+  <view class="home">
+    <view class='page-block' wx:if="{{userFullInfo}}">
+      <view class='userinfo-block'>
+        <text>{{userFullInfo.nickName}}</text>
+        <image mode="aspectFit" src="{{userFullInfo.avatarUrl}}"></image>
+      </view>
+      <view class='tool-block'>
+        <repeat key="{{index}}" item="item" for="{{tools}}">
+          <toolbar :item="item" />
+        </repeat>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import AV from 'leancloud-storage/dist/av-weapp-min.js'
+  import wepy from 'wepy'
+  import toolbar from '@/components/toolbar'
+  export default class Index extends wepy.page {
+    components = {
+      toolbar: toolbar
+    }
+    data = {
+      userFullInfo: null,
+      tools: [{
+        imgSrc: '../../images/todo.svg',
+        url: '123'
+      }, {
+        imgSrc: '../../images/location.svg',
+        url: '456'
+      }, {
+        imgSrc: '../../images/movie.svg',
+        url: '789'
+      }]
+    }
+    onLoad() {
+      let self = this
+      // const user = AV.User.current()
+      wepy.showLoading({
+        title: '加载中...',
+        mask: true
+      })
+      AV.User.loginWithWeapp().then(_user => {
+        self.userFullInfo = _user.toJSON()
+        self.$apply()
+        wepy.hideLoading()
+        console.log(self.userFullInfo)
+      }).catch(console.error)
+    }
+    methods = {
+      goPage(url) {
+        const _url = `../${url}/${url}`
+        wepy.navigateTo({
+          url: _url
+        })
+      }
+    }
+  }
+</script>

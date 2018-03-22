@@ -7,7 +7,15 @@ Page({
    */
   data: {
     userName: '',
-    avatar:''
+    avatar: '',
+    tools: [{
+      imgSrc: '../../images/todo.svg',
+      url:''
+    }, {
+      imgSrc: '../../images/location.svg'
+    }, {
+      imgSrc: '../../images/movie.svg'
+    }]
   },
 
   /**
@@ -89,5 +97,11 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  goPage(url){
+    const _url = `../${url}/${url}`
+    wx.navigateTo({
+      url: _url
+    })
   }
 })

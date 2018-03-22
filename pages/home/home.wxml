@@ -1,14 +1,14 @@
 <!--pages/home/home.wxml-->
 <view class="home">
-  <view class='page-block'>
-    <view class='userinfo-block' wx:if="{{userName}}">
+  <view class='page-block' wx:if="{{userName}}">
+    <view class='userinfo-block'>
       <text>{{userName}}</text>
       <image mode="aspectFit" src="{{avatar}}"></image>
     </view>
     <view class='tool-block'>
-      <view class='tool-block-item'></view>
-      <view class='tool-block-item'></view>
-      <view class='tool-block-item'></view>
+      <view catchtap="goPage" class='tool-block-item' wx:key wx:for-item="item" wx:for="{{tools}}" hover-class="tool-item-hover" hover-stay-time="50">
+        <image mode="aspectFit" src='{{item.imgSrc}}'></image>
+      </view>
     </view>
   </view>
 </view>

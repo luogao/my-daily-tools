@@ -1,7 +1,7 @@
 <!--pages/movieList/movieList.wxml-->
 <scroll-view class='movie-list-container'>
   <view class='section-title'>
-      正在热映
+    正在热映
   </view>
   <view catchtap='gotoDetailPage' data-id='{{item.id}}' class='movie-item' wx:for="{{listData}}" wx:key wx:for-item="item" hover-class="movie-item-hover" hover-stay-time="50">
     <image src="{{item.img}}" mode='aspectFill' lazy-load="true"></image>
