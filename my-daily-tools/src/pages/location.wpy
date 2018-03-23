@@ -1,0 +1,39 @@
+<template>
+  <view class="container">
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class Index extends wepy.page {
+    data = {
+      currentLocation: null
+    }
+    methods = {}
+    events = {}
+    onLoad() {
+      // wx.chooseLocation({
+      //   success(res) {
+      //     console.log(res.name)
+      //     console.log(res.address)
+      //   }
+      // })
+      wx.getLocation({
+        type: 'gcj02', // 返回可以用于wx.openLocation的经纬度
+        success: function(res) {
+          var latitude = res.latitude
+          var longitude = res.longitude
+          wx.openLocation({
+            latitude: latitude,
+            longitude: longitude,
+            scale: 28
+          })
+        }
+      })
+    }
+  }
+</script>
+
+<style lang="scss">
+
+</style>

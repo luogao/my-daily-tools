@@ -1,64 +1,81 @@
 <style lang="scss">
+  @import "../assets/css/index.scss";
   .home {
     height: 100%;
   }
   .page-block {
-    padding: 10px 20px 0 20px;
+    padding: 0 40rpx;
   }
   .userinfo-block {
-    font-size: 36px;
+    font-size: 72rpx;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin: 0 3%;
-  }
-  .userinfo-block image {
-    width: 66px;
-    height: 66px;
-    border-radius: 50%;
-    overflow: hidden;
+    image {
+      width: 132rpx;
+      height: 132rpx;
+      border-radius: 50%;
+      overflow: hidden;
+    }
   }
   .tool-block {
-    margin-top: 50px;
+    margin-top: 100rpx;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin: 50px 3% 0;
+    margin: 60rpx 0 0;
   }
-  .tool-block-item {
-    width: 130px;
-    height: 130px;
-    border-radius: 8px;
-    box-shadow: 0px 10px 40px -10px rgba(0, 64, 128, 0.2);
-    margin-bottom: 50px;
-    padding: 20px;
-    box-sizing: border-box;
-    transition: all 0.3s;
+  .location-block {
+    padding-top: 20rpx;
+    font-weight: 100;
+    display: flex;
+    align-items: center;
+    >image {
+      width: 60rpx;
+      transition: all 0.3s ease;
+      filter: grayscale(100%);
+      opacity: 1;
+    }
+    .location-info {
+      @include ellipsis(1);
+    }
+    &.hasdata {
+      image {
+        transition: all 0.3s ease;
+        filter: none;
+        opacity: 1;
+      }
+    }
   }
-  .tool-block-item:nth-child(1) {
-    background-color: #51adcf;
-  }
-  .tool-block-item:nth-child(2) {
-    background-color: #a5ecd7;
-  }
-  .tool-block-item:nth-child(3) {
-    background-color: #2E383F;
-  }
-  .tool-block-item image {
-    width: 100%;
-    height: 100%;
-  }
-  .tool-item-hover {
-    box-shadow: none;
+  .action-block {
+    display: flex;
+    align-items: center;
+    .delete-btn {
+      white-space: nowrap;
+      border: 0rpx;
+      line-height: 0;
+      padding: 10rpx;
+      border-radius: 50%;
+      image {
+        width: 40rpx;
+      }
+    }
   }
 </style>
 
 <template>
-  <view class="home">
+  <view class="home container">
     <view class='page-block' wx:if="{{userFullInfo}}">
       <view class='userinfo-block'>
         <text>{{userFullInfo.nickName}}</text>
         <image mode="aspectFit" src="{{userFullInfo.avatarUrl}}"></image>
+      </view>
+      <view class="location-block {{curLocation? 'hasdata': ''}}">
+        <image mode="widthFix" src="../images/location.svg"></image>
+        <text @tap="getCurLocation" class="location-info">{{curLocation? curLocation.name:'点击获取当前位置'}}</text>
+        <view class="action-block" wx:if="{{curLocation}}">
+          <button @tap="clearCurLoction" plain class="delete-btn" size="mini"><image mode="widthFix" src="../images/delete.svg"></image></button>
+        </view>
       </view>
       <view class='tool-block'>
         <repeat key="{{index}}" item="item" for="{{tools}}">
@@ -79,38 +96,51 @@
     }
     data = {
       userFullInfo: null,
+      curLocation: null,
       tools: [{
-        imgSrc: '../../images/todo.svg',
+        imgSrc: '../images/todo.svg',
         url: '123'
       }, {
-        imgSrc: '../../images/location.svg',
-        url: '456'
-      }, {
-        imgSrc: '../../images/movie.svg',
+        imgSrc: '../images/movie.svg',
         url: '789'
       }]
     }
     onLoad() {
       let self = this
-      // const user = AV.User.current()
-      wepy.showLoading({
+      wx.showLoading({
         title: '加载中...',
         mask: true
       })
-      AV.User.loginWithWeapp().then(_user => {
-        self.userFullInfo = _user.toJSON()
-        self.$apply()
-        wepy.hideLoading()
-        console.log(self.userFullInfo)
-      }).catch(console.error)
+      self.userLoginAV()
     }
     methods = {
-      goPage(url) {
-        const _url = `../${url}/${url}`
-        wepy.navigateTo({
-          url: _url
+      getCurLocation() {
+        const self = this
+        wx.chooseLocation({
+          success(res) {
+            if (res.name) {
+              self.curLocation = res
+              self.$apply()
+            } else {
+              wx.showToast({
+                title: '获取地址失败，请重试',
+                icon: 'none',
+                duration: 2000
+              })
+            }
+          }
         })
+      },
+      clearCurLoction() {
+        this.curLocation = null
       }
+    }
+    async userLoginAV() {
+      const self = this
+      const user = await AV.User.loginWithWeapp()
+      self.userFullInfo = user.toJSON()
+      self.$apply()
+      wepy.hideLoading()
     }
   }
 </script>
