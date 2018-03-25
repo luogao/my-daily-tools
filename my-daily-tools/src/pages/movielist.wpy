@@ -1,0 +1,60 @@
+<template>
+  <scroll-view class='movie-list-container container' @scroll.default="onScroll">
+    <view class="page-block">
+      <view class='page-title'>
+        正在热映
+      </view>
+      <repeat key="{{index}}" item="item" for="{{lists}}" wx:if="{{lists}}">
+        <movieitem :item="item" />
+      </repeat>
+    </view>
+  </scroll-view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import movieitem from '@/components/movieitem'
+  export default class Index extends wepy.page {
+    data = {
+      lists: null,
+      baseUrl: 'https://api-m.mtime.cn/', // 时光网Api
+      locationID: '292', // 上海
+      subUrl: 'Showtime/LocationMovies.api?'
+      // PageSubArea/HotPlayMovies.api? //正在售票
+      // Showtime/LocationMovies.api? //正在热映
+      // Movie/MovieComingNew.api? //即将上映
+    }
+    methods = {
+      onScroll(event) {
+        console.log(event.detail)
+      }
+    }
+    events = {}
+    components = {
+      movieitem: movieitem
+    }
+    onLoad() {
+      let self = this
+      wx.showLoading({
+        title: '加载中...',
+        mask: true
+      })
+      self.getMovieList(self.subUrl, self.locationID)
+    }
+    async getMovieList(url, location) {
+      let self = this
+      if (url && location) {
+        let _url = `${self.baseUrl}${url}locationId=${location}`
+        const lists = await wepy.request(_url)
+        self.lists = lists.data.ms
+        self.$apply()
+        wx.hideLoading()
+      } else {
+        wx.hideLoading()
+        console.log('error')
+      }
+    }
+  }
+</script>
+<style lang="scss">
+</style>

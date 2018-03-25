@@ -1,7 +1,14 @@
 <style lang="scss">
   .container {
     height: 100%;
-    box-sizing: border-box;
+  }
+  .page-block {
+    padding: 0 40rpx;
+  }
+  .page-title {
+    padding-bottom: 30px;
+    font-size: 36px;
+    font-weight: 100;
   }
 </style>
 
@@ -14,7 +21,8 @@
     config = {
       pages: [
         'pages/home',
-        'pages/location'
+        'pages/location',
+        'pages/movielist'
       ],
       window: {
         backgroundTextStyle: 'light',

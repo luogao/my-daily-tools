@@ -1,0 +1,92 @@
+<style lang="scss">
+  @import "../assets/css/index.scss";
+  .movie-item {
+    box-sizing: border-box;
+    float: left;
+    width: 50%;
+    padding-left: 4%;
+    padding-right: 4%;
+    margin-bottom: 40rpx;
+    position: relative;
+    &:nth-child(even) {
+      padding-left: 0;
+    }
+    &:nth-child(odd) {
+      padding-right: 0;
+      .item-score{
+        right:-20rpx !important;
+      }
+    }
+    image {
+      height: 480rpx;
+      width: 100%;
+      box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.6);
+      transition: all 0.3s;
+    }
+    .item-info {
+      .item-name {
+        text-align: left;
+        font-size: 16px;
+        display: block;
+        font-weight: 200;
+        @include ellipsis(1);
+      }
+      .item-score {
+        color: #fff;
+        width: 70rpx;
+        height: 70rpx;
+        line-height: 70rpx;
+        border-radius: 50%;
+        background: #e4a813;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 100;
+        position: absolute;
+        right: 4rpx;
+        bottom: 110rpx;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      }
+      .item-actors {
+        color: #555;
+        display: block;
+        width: 100%;
+        text-align: left;
+        font-size: 12px;
+        font-weight: 100;
+        @include ellipsis(1);
+      }
+    }
+  }
+  .movie-item-hover image {
+    box-shadow: none;
+  }
+</style>
+
+<template>
+  <view @tap='gotoDetailPage' class='movie-item' hover-class="movie-item-hover" hover-stay-time="50">
+    <image src="{{item.img}}" mode='aspectFill' lazy-load="true"></image>
+    <view class='item-info'>
+      <text class='item-name'>{{item.t}}</text>
+      <text class='item-score'>{{item.r == '-1'?"无":item.r}}</text>
+      <text class='item-actors'>{{item.aN1 ? item.aN1 : '无'}}</text>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class List extends wepy.component {
+    props = {
+      item: {}
+    }
+    methods = {
+      gotoDetailPage() {
+        const _url = `../pages/${this.item.url}`
+        wepy.navigateTo({
+          url: _url
+        })
+      }
+    }
+    onLoad() {}
+  }
+</script>

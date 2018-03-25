@@ -1,11 +1,5 @@
 <style lang="scss">
   @import "../assets/css/index.scss";
-  .home {
-    height: 100%;
-  }
-  .page-block {
-    padding: 0 40rpx;
-  }
   .userinfo-block {
     font-size: 72rpx;
     display: flex;
@@ -64,7 +58,7 @@
 </style>
 
 <template>
-  <view class="home container">
+  <view class="container">
     <view class='page-block' wx:if="{{userFullInfo}}">
       <view class='userinfo-block'>
         <text>{{userFullInfo.nickName}}</text>
@@ -102,7 +96,7 @@
         url: '123'
       }, {
         imgSrc: '../images/movie.svg',
-        url: '789'
+        url: 'movielist'
       }]
     }
     onLoad() {
