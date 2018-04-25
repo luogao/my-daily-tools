@@ -76,6 +76,11 @@
           <toolbar :item="item" />
         </repeat>
       </view>
+      <form bindsubmit="formSubmit" report-submit>
+        <view class="btn-area">
+          <button formType="submit">Submit</button>
+        </view>
+      </form>
     </view>
   </view>
 </template>
@@ -108,6 +113,17 @@
       self.userLoginAV()
     }
     methods = {
+      formSubmit: function(e) {
+        const self = this
+        console.log(e.detail.formId)
+        wx.request({
+          url: 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wxb53d723fc1a19562&secret=',
+          success: function (data) {
+            console.log(data.data.access_token)
+            self.sendMessage(data.data.access_token, e.detail.formId)
+          }
+        })
+      },
       getCurLocation() {
         const self = this
         wx.chooseLocation({
@@ -135,6 +151,31 @@
       self.userFullInfo = user.toJSON()
       self.$apply()
       wepy.hideLoading()
+    }
+    sendMessage(ACCESS_TOKEN, formID) {
+      wx.request({
+        url: `https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=${ACCESS_TOKEN}`,
+        method: 'POST',
+        data: {
+          template_id: '',
+          form_id: formID,
+          touser: '',
+          data: {
+            keyword1: {
+              value: '2018-04-26'
+            },
+            keyword2: {
+              value: '带身份证'
+            },
+            keyword3: {
+              value: '带身份证'
+            }
+          }
+        },
+        success: function (data) {
+          console.log(data)
+        }
+      })
     }
   }
 </script>

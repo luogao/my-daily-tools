@@ -28,6 +28,7 @@ Page({
       title: "加载中...",
       mask: true
     })
+
     AV.User.loginWithWeapp().then(user => {
       app.globalData.userInfo = user.toJSON();
       console.log(user)
@@ -98,7 +99,8 @@ Page({
   onShareAppMessage: function () {
 
   },
-  goPage(url){
+  goPage(e){
+    
     const _url = `../${url}/${url}`
     wx.navigateTo({
       url: _url
