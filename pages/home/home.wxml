@@ -5,8 +5,17 @@
       <text>{{userName}}</text>
       <image mode="aspectFit" src="{{avatar}}"></image>
     </view>
+    <view class="location-block {{curLocation? 'hasdata': ''}}">
+      <image mode="widthFix" src="../../images/location.svg"></image>
+      <text bindtap="getCurLocation" class="location-info one-line">{{curLocation? curLocation.name:'点击获取当前位置'}}</text>
+      <view class="action-block" wx:if="{{curLocation}}">
+        <button bindtap="clearCurLoction" plain class="delete-btn" size="mini">
+          <image mode="widthFix" src="../../images/delete.svg"></image>
+        </button>
+      </view>
+    </view>
     <view class='tool-block'>
-      <view catchtap="goPage" class='tool-block-item' wx:key wx:for-item="item" wx:for="{{tools}}" hover-class="tool-item-hover" hover-stay-time="50">
+      <view data-page="{{item.page}}" catchtap="goPage" class='tool-block-item' wx:key wx:for-item="item" wx:for="{{tools}}" hover-class="tool-item-hover" hover-stay-time="50">
         <image mode="aspectFit" src='{{item.imgSrc}}'></image>
       </view>
     </view>

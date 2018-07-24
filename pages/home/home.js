@@ -6,18 +6,18 @@ Page({
    * 页面的初始数据
    */
   data: {
+    userInfo: {},
     userName: '',
     avatar: '',
+    curLocation: '',
     tools: [{
       imgSrc: '../../images/todo.svg',
-      url:''
+      page: 'index'
     }, {
-      imgSrc: '../../images/location.svg'
-    }, {
-      imgSrc: '../../images/movie.svg'
+      imgSrc: '../../images/movie.svg',
+      page: 'movieList'
     }]
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -29,25 +29,28 @@ Page({
       mask: true
     })
     AV.User.loginWithWeapp().then(user => {
-      app.globalData.userInfo = user.toJSON();
-      console.log(user)
-    }).catch(console.error);
-
-    if (user) {
-      wx.getUserInfo({
-        success: ({ userInfo }) => {
-          // 更新当前用户的信息
-          user.set(userInfo).save().then(user => {
-            app.globalData.userInfo = user.toJSON();
-            self.setData({
-              userName: app.globalData.userInfo.nickName,
-              avatar: app.globalData.userInfo.avatarUrl
-            })
-            wx.hideLoading()
-          }).catch(console.error);
-        }
+      this.setData({
+        userName: user.toJSON().nickName,
+        avatar: user.toJSON().avatarUrl
       })
-    }
+      console.log(user)
+      wx.hideLoading()
+    }).catch(console.error);
+    // if (user) {
+    //   wx.getUserInfo({
+    //     success: ({ userInfo }) => {
+    //       // 更新当前用户的信息
+    //       user.set(userInfo).save().then(user => {
+    //         app.globalData.userInfo = user.toJSON();
+    //         self.setData({
+    //           userName: app.globalData.userInfo.nickName,
+    //           avatar: app.globalData.userInfo.avatarUrl
+    //         })
+    //         wx.hideLoading()
+    //       }).catch(console.error);
+    //     }
+    //   })
+    // }
   },
 
   /**
@@ -91,17 +94,42 @@ Page({
   onReachBottom: function () {
 
   },
-
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
 
   },
-  goPage(url){
-    const _url = `../${url}/${url}`
+  goPage(e) {
+    console.log(e)
+    const { page } = e.currentTarget.dataset
+    const _url = `../${page}/${page}`
+    console.log(_url)
     wx.navigateTo({
       url: _url
+    })
+  },
+  getCurLocation() {
+    const self = this
+    wx.chooseLocation({
+      success(res) {
+        if (res.name) {
+          self.setData({
+            curLocation: res
+          })
+        } else {
+          wx.showToast({
+            title: '获取地址失败，请重试',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      }
+    })
+  },
+  clearCurLoction() {
+    this.setData({
+      curLocation: ''
     })
   }
 })

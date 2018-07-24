@@ -1,7 +1,9 @@
 /**app.wxss**/
-page{
+
+page {
   height: 100%;
 }
+
 .container {
   height: 100%;
   position: fixed;
@@ -14,8 +16,14 @@ page{
   align-items: center;
 }
 
-
 .my-hover-class {
   opacity: .5;
   transition: all 0.1s;
+}
+
+.one-line {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+  overflow: hidden;
 }

@@ -2,9 +2,11 @@
 Page{
   background-color: #000 !important;
 }
+
 body{
   height: 100%;
 }
+
 .movie-detail-container {
   height: 100%;
   background: #000;

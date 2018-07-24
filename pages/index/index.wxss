@@ -5,7 +5,7 @@
   justify-content: space-between;
   align-items: center;
   animation: fadeInUp 0.8s;
-  padding: 0 10px;
+  padding: 0 20rpx;
 }
 
 .lists-container {
@@ -16,60 +16,30 @@
   flex: 1;
 }
 
-.label-1 {
-  border: 1px solid #ccc;
-  margin: 10px;
-  display: none;
-}
-
-.label-1__text {
-  display: inline-block;
-  vertical-align: middle;
-}
-
-.label-1__icon {
-  position: relative;
-  margin-right: 10px;
-  display: inline-block;
-  vertical-align: middle;
-  width: 18px;
-  height: 18px;
-  background: #fcfff4;
-}
-
-.label-1__icon-checked {
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  width: 12px;
-  height: 12px;
-  background: #1aad19;
-}
-
 .list-item {
   width: 100%;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(136, 136, 136, 0.43);
+  padding: 20rpx;
+  margin: 20rpx 0;
+  border-radius: 10rpx;
+  box-shadow: 0 4rpx 8rpx rgba(136, 136, 136, 0.43);
   transition: all 0.1s;
   position: relative;
 }
 
 .list-item.finish {
-  border-top: 5px solid #63d47a;
+  border-top: 10rpx solid #63d47a;
 }
 
 .list-item.not-finish {
-  border-top: 5px solid #ff0302;
+  border-top: 10rpx solid #ff0302;
 }
 
 .list-item .item-title {
-  padding-bottom: 10px;
-  font-size: 24px;
+  padding-bottom: 20rpx;
+  font-size: 48rpx;
   font-weight: 500;
 }
 
@@ -77,21 +47,21 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 20rpx;
 }
 
 .list-item .item-deadline {
-  font-size: 12px;
+  font-size: 24rpx;
   color: #000;
 }
 
 .list-item .item-date {
-  font-size: 12px;
+  font-size: 24rpx;
   color: #999;
 }
 
 .list-item .item-summary {
-  font-size: 14px;
+  font-size: 28rpx;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -103,16 +73,16 @@
 
 button.create-btn {
   position: fixed;
-  bottom: 30px;
+  bottom: 60rpx;
   background: #63d47a;
   color: #fff;
-  width: 145px;
-  height: 45px;
-  line-height: 45px;
-  font-size: 18px;
-  right: 20px;
+  width: 290rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 36rpx;
+  right: 40rpx;
   border: 0px;
-  box-shadow: 2px 8px 20px 0 rgba(31, 32, 68, 0.25);
+  box-shadow: 4rpx 16rpx 40rpx 0 rgba(31, 32, 68, 0.25);
 }
 
 .actions-container {
@@ -120,14 +90,14 @@ button.create-btn {
   box-sizing: border-box;
   overflow: hidden;
   padding: 10px;
-  box-shadow: 0 2px 4px rgba(136, 136, 136, 0.43);
+  box-shadow: 0 4rpx 8rpx rgba(136, 136, 136, 0.43);
   /* box-shadow: rgba(0, 0, 0, 0.14) 0px 4px 5px 0px,
                 rgba(0, 0, 0, 0.12) 0px 1px 10px 0px,
                 rgba(0, 0, 0, 0.2) 0px 2px 4px -1px; */
 }
 
 .actions-container button.status-toggle {
-  box-shadow: 0 2px 4px rgba(136, 136, 136, 0.43);
+  box-shadow: 0 4rpx 8rpx rgba(136, 136, 136, 0.43);
   color: #fff;
   background: #909399;
   border: none;
@@ -135,23 +105,22 @@ button.create-btn {
 }
 
 .actions-container button.location-btn {
-  box-shadow: 0 2px 4px rgba(136, 136, 136, 0.43);
+  box-shadow: 0 4rpx 8rpx rgba(136, 136, 136, 0.43);
   color: #fff;
   background: #909399;
   border: none;
   float: left;
 }
-.actions-container button:not(:first-child){
-  margin-left: 10px;
-}
 
+.actions-container button:not(:first-child) {
+  margin-left: 20rpx;
+}
 
 @keyframes fadeInUp {
   from {
     opacity: 0;
     transform: translate3d(0, 100%, 0);
   }
-
   to {
     opacity: 1;
     transform: none;

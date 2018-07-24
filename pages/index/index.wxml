@@ -1,27 +1,7 @@
 <!--index.wxml-->
 <view class="container">
-  <view class='actions-container'>
-    <button catchtap="listFilterStatus" data-filter="isFinished" class='status-toggle' size="mini" plain>
-      {{listFilter.isFinished?'已完成':'待完成'}}
-    </button>
-    <button class='location-btn' plain catchtap="getLocation" size="mini">
-      {{curLocation?curLocation:'获取位置'}}
-    </button>
-    <button class='location-btn' plain catchtap="getMovie" size="mini">
-      近期上映
-    </button>
-  </view>
   <scroll-view scroll-y="true" class='lists-container'>
     <view class="list-item-wrap" wx:if="{{item.isFinished === listFilter.isFinished}}" wx:for="{{listData}}" wx:key wx:for-item="item">
-      <view class="label-1">
-        <label>
-          <checkbox hidden value="" checked="{{item.checked}}"></checkbox>
-          <view class="label-1__icon">
-            <view class="label-1__icon-checked" style="opacity:{{item.checked ? 1: 0}}"></view>
-          </view>
-          <text class="label-1__text">{{item.value}}</text>
-        </label>
-      </view>
       <view catchtap="bindViewTap" data-uid="{{item.uId}}" hover-class="my-hover-class" hover-stay-time="50" class="{{item.isFinished? ' list-item finish ':'list-item not-finish '}}">
         <view class='item-dateinfo'>
           <text class='item-date'>{{item.createAt}}</text>
