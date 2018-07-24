@@ -101,17 +101,9 @@ Page({
   onShareAppMessage: function () {
 
   },
-<<<<<<< HEAD
   goPage(e) {
-    console.log(e)
     const { page } = e.currentTarget.dataset
     const _url = `../${page}/${page}`
-    console.log(_url)
-=======
-  goPage(e){
-    
-    const _url = `../${url}/${url}`
->>>>>>> 12ddefb8621a2f19806ae7710d05ad14c75598c7
     wx.navigateTo({
       url: _url
     })
