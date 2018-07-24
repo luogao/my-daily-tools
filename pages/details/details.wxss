@@ -1,37 +1,37 @@
 .action-form {
   width: 100%;
   box-sizing: border-box;
-  padding: 10px;
+  padding:20rpx;
 }
 
 .action-form .form-item {
-  padding: 10px;
+  padding: 20rpx;
 }
 
 .action-form .form-item>text {
-  font-size: 14px;
-  border-bottom: solid 1px #999;
-  margin-bottom: 10px;
+  font-size: 28rpx;
+  border-bottom: solid 2rpx #999;
+  margin-bottom: 20rpx;
   color: #999;
   display: inline-block;
 }
 
 .action-form .form-item:not(:last-child) {
-  margin-bottom: 10px;
+  margin-bottom: 20rpx;
 }
 
 .form-item.for-title input {
-  height: 36px;
+  height: 72rpx;
 }
 
 .form-item input, .picker, .form-item textarea {
-  font-size: 24px;
+  font-size: 48rpx;
 }
 .details-item{
-  font-size: 24px;
+  font-size: 48rpx;
 }
 .details-item.details-title{
-  height: 36px;
+  height: 72rpx;
 }
 .details-item.picker{
   padding: 0;
@@ -47,28 +47,28 @@
 
 button.done-btn {
   position: fixed;
-  bottom: 30px;
+  bottom: 60rpx;
   background: #63d47a;
   color: #fff;
-  width: 145px;
-  height: 45px;
-  right: 20px;
-  line-height: 45px;
-  font-size: 18px;
+  width: 190rpx;
+  height: 90rpx;
+  right: 40rpx;
+  line-height: 90rpx;
+  font-size: 36rpx;
   border: 0px;
-  box-shadow: 2px 8px 20px 0 rgba(31, 32, 68, 0.25);
+  box-shadow: 4rpx 16rpx 40rpx 0 rgba(31, 32, 68, 0.25);
 }
 
 button.delete-btn {
   position: fixed;
-  bottom: 30px;
+  bottom: 60rpx;
   background: #ff0302;
   color: #fff;
-  width: 145px;
-  height: 45px;
-  right: 20px;
-  line-height: 45px;
-  font-size: 18px;
+  width: 190rpx;
+  height: 90rpx;
+  right: 40rpx;
+  line-height: 90rpx;
+  font-size: 36rpx;
   border: 0px;
-  box-shadow: 2px 8px 20px 0 rgba(31, 32, 68, 0.25);
+  box-shadow: 4rpx 16rpx 40rpx 0 rgba(31, 32, 68, 0.25);
 }

@@ -1,9 +1,10 @@
 /* pages/movieDetail/detail.wxss */
-Page{
-  background-color: #000 !important;
+
+page {
+  background: #000;
 }
 
-body{
+body {
   height: 100%;
 }
 
@@ -20,8 +21,7 @@ body{
   left: 0;
 }
 
-.movie-basic-info {
-}
+.movie-basic-info {}
 
 .movie-basic-info {
   overflow: hidden;
@@ -48,25 +48,25 @@ body{
 
 .movie-score {
   color: #e4a813;
-  font-size: 24px;
+  font-size: 48rpx;
   text-align: left;
-  padding-right: 10px;
+  padding-right: 20rpx;
 }
 
 .movie-info-txt .movie-name {
-  font-size: 36px;
+  font-size: 72rpx;
   font-weight: 400;
   text-align: left;
 }
 
 .movie-info-txt .movie-commentSpecial {
-  font-size: 14px;
+  font-size: 28rpx;
   font-weight: 100;
 }
 
 .movie-info-txt .movie-commentSpecial::before {
   content: '——';
-  padding-right: 5px;
+  padding-right: 10rpx;
 }
 
 .movie-basic-info::after {
@@ -81,12 +81,12 @@ body{
 }
 
 .movie-detail-info {
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
   font-weight: 100;
   color: #ccc;
   background: #000;
-  font-size: 12px;
+  font-size: 24rpx;
   padding-left: 2%;
   padding-right: 2%;
   box-sizing: border-box;
@@ -94,65 +94,77 @@ body{
   justify-content: space-between;
 }
 
-.movie-story,.movie-actor,.movie-comment{
+.movie-story,
+.movie-actor,
+.movie-comment {
   padding-left: 2%;
   padding-right: 2%;
   box-sizing: border-box;
-  color:#ccc;
+  color: #ccc;
 }
-.section-title{
+
+.section-title {
   color: #fff;
   display: block;
-  padding-top:15px; 
-  padding-bottom: 5px;
+  padding-top: 30rpx;
+  padding-bottom: 10rpx;
   font-weight: 100;
 }
-.movie-story-text{
-  font-size: 16px;
+
+.movie-story-text {
+  font-size: 32rpx;
   font-weight: 100;
   text-indent: 2em;
-  display:inline-block;
+  display: inline-block;
 }
-.movie-actor .scroller{
+
+.movie-actor .scroller {
   white-space: nowrap;
 }
-.movier-item{
+
+.movier-item {
   width: 25%;
   box-sizing: border-box;
-  padding: 5px;
+  padding: 10rpx;
   display: inline-flex;
   flex-direction: column;
 }
 
-.movier-item .actor-name{
-  font-size: 12px;
+.movier-item .actor-name {
+  font-size: 24rpx;
   text-align: center;
-  padding-top: 5px;
+  padding-top: 10rpx;
 }
-.img-box{
+
+.img-box {
   position: relative;
   padding: 75% 50%;
 }
-.img-box image{
+
+.img-box image {
   width: 100%;
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
 }
-.movie-comment-item{
-  font-size:14px;
-  padding-bottom: 10px;
-  padding-top: 10px;
+
+.movie-comment-item {
+  font-size: 28rpx;
+  padding-bottom: 20rpx;
+  padding-top: 20rpx;
 }
-.movie-comment-item .comment-rate{
+
+.movie-comment-item .comment-rate {
   color: #e4a813;
-  padding-right: 10px;
+  padding-right: 20rpx;
 }
-.movie-comment-item .comment-content{
-  font-size:14px;
+
+.movie-comment-item .comment-content {
+  font-size: 28rpx;
   font-weight: 100;
 }
-.movie-comment{
-  padding-bottom: 30px;
+
+.movie-comment {
+  padding-bottom: 60rpx;
 }

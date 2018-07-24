@@ -5,7 +5,7 @@
 }
 
 .page-block {
-  padding: 10px 20px 0 20px;
+  padding: 20rpx 40rpx 0 40rpx;
 }
 
 .userinfo-block {
@@ -16,8 +16,8 @@
 }
 
 .userinfo-block image {
-  width: 66px;
-  height: 66px;
+  width: 132rpx;
+  height: 132rpx;
   border-radius: 50%;
   overflow: hidden;
 }
