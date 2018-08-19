@@ -138,16 +138,14 @@ body {
 
 .img-box {
   position: relative;
-  padding: 75% 50%;
+  height: 216rpx;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
-.img-box image {
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-}
+
 
 .movie-comment-item {
   font-size: 28rpx;

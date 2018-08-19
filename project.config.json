@@ -8,7 +8,7 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.5.4",
+	"libVersion": "2.2.3",
 	"appid": "wxb53d723fc1a19562",
 	"projectname": "%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7",
 	"condition": {
@@ -20,9 +20,30 @@
 			"current": -1,
 			"list": []
 		},
-		"miniprogram": {
+		"plugin": {
 			"current": -1,
 			"list": []
+		},
+		"game": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 1,
+			"list": [
+				{
+					"id": 0,
+					"name": "电影详情",
+					"pathName": "pages/movieDetail/detail",
+					"query": "id=241018"
+				},
+				{
+					"id": -1,
+					"name": "todos",
+					"pathName": "pages/index/index",
+					"query": ""
+				}
+			]
 		}
 	}
 }

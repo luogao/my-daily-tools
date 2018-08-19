@@ -3,7 +3,6 @@ const util = require('../../utils/util.js')
 
 Page({
   data: {
-    deadline: '2018-01-03',
     status: false,
     today: null,
     curId: null,

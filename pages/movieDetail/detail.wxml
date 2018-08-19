@@ -30,14 +30,13 @@
     <text class='section-title'>影人</text>
     <scroll-view scroll-x class='scroller'>
       <view class='movier-item director'>
-        <view class='img-box'>
-          <image src="{{detailData.basic.director.img}}" class="movier-image"></image>
+        <view class='img-box' style='background-image:url({{detailData.basic.director.img}})'>
         </view>
         <text class='actor-name'>(导演){{detailData.basic.director.name?detailData.basic.director.name : '未知'}}</text>
       </view>
       <view class='movier-item' wx:for="{{detailData.basic.actors}}" wx:key wx:for-item="item">
-        <view class='img-box'>
-          <image src="{{item.img}}" class="movier-image"></image>
+        <view class='img-box' style='background-image:url({{item.img}})'>
+          
         </view>
         <text class='actor-name'>{{item.name?item.name : '未知'}}</text>
       </view>
