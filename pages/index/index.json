@@ -1,4 +1,7 @@
 {
   "enablePullDownRefresh": false,
-  "navigationBarTitleText": "Todos"
+  "navigationBarTitleText": "Todos",
+  "usingComponents": {
+    "todolist": "/components/todolist/todolist"
+  }
 }

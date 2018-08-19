@@ -6,25 +6,14 @@ const AV = require('../../libs/av-weapp-min.js');
 
 Page({
   data: {
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
     listData: [],
-    listFilter: {
-      isFinished: false
-    },
-    curLocation: null
+    curLocation: null,
+    currentPage: 0
   },
   //事件处理函数
-  bindViewTap: function (e) {
+  itemClickHandler: function(e) {
     wx.navigateTo({
-      url: `../details/details?id=${e.currentTarget.dataset.uid}`
-    })
-  },
-  listFilterStatus(e) {
-    let tempdata = !this.data.listFilter.isFinished
-    this.setData({
-      'listFilter.isFinished': tempdata
+      url: `../details/details?id=${e.detail.currentTarget.dataset.uid}`
     })
   },
   fetchData(cb) {
@@ -72,31 +61,7 @@ Page({
     })
     this.fetchData()
   },
-  getLocation() {
-    let self = this
-    wx.chooseLocation({
-      success(res) {
-        console.log(res.name)
-        console.log(res.address)
-        self.setData({
-          curLocation: res.name
-        })
-      }
-    })
-  },
-  getMovie() {
-    let self = this
-    wx.navigateTo({
-      url: `../movieList/movieList`
-    })
-  },
-  onUnload() {
-  },
-  setCurrentUser() {
-    const user = AV.User.current();
-    if (user) return true
-    return false
-  },
+  onUnload() {},
   createNew() {
     wx.navigateTo({
       url: '../details/details?id=-1'
