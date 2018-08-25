@@ -159,7 +159,7 @@ Page({
           curId: tempData.uId,
           itemValue: tempData
         })
-        wx.hideToast()
+        wx.hideLoading()
         wx.showToast({
           title: '成功',
           icon: 'success',

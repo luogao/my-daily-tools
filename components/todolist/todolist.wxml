@@ -1,5 +1,5 @@
 <scroll-view scroll-y="true" class='lists-container'>
-  <view class="list-item-wrap" wx:for="{{currentList}}" wx:key wx:for-item="item">
+  <view class="list-item-wrap" wx:for="{{todos}}" wx:key wx:for-item="item">
     <view catchtap="itemClick" data-uid="{{item.uId}}" hover-class="my-hover-class" hover-stay-time="50" class="{{item.isFinished? ' list-item finish ':'list-item not-finish '}}">
       <view class='item-dateinfo'>
         <text class='item-date'>{{item.createAt}}</text>

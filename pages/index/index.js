@@ -6,8 +6,10 @@ const AV = require('../../libs/av-weapp-min.js');
 
 Page({
   data: {
-    listData: [],
-    curLocation: null,
+    listData: {
+      finished: [],
+      notFinished: []
+    },
     currentPage: 0
   },
   //事件处理函数
@@ -17,6 +19,9 @@ Page({
     })
   },
   fetchData(cb) {
+    wx.showLoading({
+      title: '加载中 ...',
+    })
     const fullData = wx.getStorageSync('todolist') || []
     const processedData = fullData.map(el => {
       el.createAt = util.formatTime(new Date(el.createAt))
@@ -25,46 +30,33 @@ Page({
       el.checked = false
       return el
     })
+    processedData.reverse()
     this.setData({
-      listData: processedData.reverse()
+      'listData.finished': this.finishedData(processedData.reverse()),
+      'listData.notFinished': this.notFinishedData(processedData.reverse())
     })
     wx.hideLoading()
     if (typeof cb === "function") {
       cb()
     }
   },
-  // onPullDownRefresh() {
-  //   let self = this 
-  //   wx.showNavigationBarLoading()
-  //   util.Store.fetch((data) => {
-  //     let fullData = data.data
-  //     fullData.forEach(el => {
-  //       el.createAt = util.formatTime(new Date(el.createAt))
-  //       el.deadline = el.deadline ? el.deadline.replace(/-/g, '/') : null
-  //     })
-  //     self.setData({
-  //       listData: fullData
-  //     })
-  //     wx.hideNavigationBarLoading() //完成停止加载
-  //     wx.stopPullDownRefresh() //停止下拉刷新
-  //   })
-  // },
   onReady() {
-    wx.showLoading({
-      title: '加载中...'
-    })
     this.fetchData()
   },
   onShow() {
-    wx.showLoading({
-      title: '加载中...'
-    })
     this.fetchData()
   },
-  onUnload() {},
   createNew() {
     wx.navigateTo({
       url: '../details/details?id=-1'
     })
+  },
+  finishedData(data) {
+    console.log(data.filter(todo => todo.isFinished === true))
+    return data.filter(todo => todo.isFinished === true)
+  },
+  notFinishedData(data) {
+    console.log(data.filter(todo => !todo.isFinished === true))
+    return data.filter(todo => !todo.isFinished === true)
   }
 })

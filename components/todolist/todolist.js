@@ -18,13 +18,9 @@ Component({
    * 组件的初始数据
    */
   data: {
-    currentList:[]
   },
   ready() {
     const list = this.data.todos.filter(todo => this.data.finish ? todo.isFinished : !todo.isFinished)
-    this.setData({
-      currentList: list
-    })
   },
   /**
    * 组件的方法列表

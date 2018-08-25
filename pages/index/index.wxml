@@ -1,14 +1,14 @@
 <!--index.wxml-->
 <view class="container">
-  <swiper current="{{currentPage}}" indicator-dots duration="500" bindanimationfinish="swiperChangeHandler">
+  <swiper current="{{currentPage}}" indicator-dots duration="500">
     <swiper-item>
       <scroll-view scroll-y="true" class='lists-container'>
-        <todolist binditemclick="itemClickHandler" todos="{{listData}}" finish="{{false}}"></todolist>
+        <todolist binditemclick="itemClickHandler" todos="{{listData.notFinished}}"></todolist>
       </scroll-view>
     </swiper-item>
     <swiper-item>
       <scroll-view scroll-y="true" class='lists-container'>
-        <todolist binditemclick="itemClickHandler" todos="{{listData}}" finish="{{true}}"></todolist>
+        <todolist binditemclick="itemClickHandler" todos="{{listData.finished}}"></todolist>
       </scroll-view>
     </swiper-item>
   </swiper>
