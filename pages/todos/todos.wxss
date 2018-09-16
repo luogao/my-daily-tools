@@ -13,6 +13,7 @@ button.create-btn {
   right: 40rpx;
   border: 0px;
   box-shadow: 4rpx 16rpx 40rpx 0 rgba(31, 32, 68, 0.25);
+  transition: all .2s;
 }
 
 .actions-container {

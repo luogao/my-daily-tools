@@ -20,3 +20,8 @@
   width: 100%;
   overflow: hidden;
 }
+
+button.todo-btn-hover{
+  transform: translateY(6px);
+  box-shadow: 0 0 0 transparent !important;
+}

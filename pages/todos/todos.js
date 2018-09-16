@@ -2,7 +2,6 @@
 //获取应用实例
 const app = getApp()
 const util = require('../../utils/util.js')
-const AV = require('../../libs/av-weapp-min.js');
 
 Page({
   data: {
@@ -15,7 +14,7 @@ Page({
   //事件处理函数
   itemClickHandler: function(e) {
     wx.navigateTo({
-      url: `../details/details?id=${e.detail.currentTarget.dataset.uid}`
+      url: `../todoDetails/todoDetails?id=${e.detail.currentTarget.dataset.uid}`
     })
   },
   fetchData(cb) {
@@ -48,15 +47,13 @@ Page({
   },
   createNew() {
     wx.navigateTo({
-      url: '../details/details?id=-1'
+      url: '../todoDetails/todoDetails?id=-1'
     })
   },
   finishedData(data) {
-    console.log(data.filter(todo => todo.isFinished === true))
     return data.filter(todo => todo.isFinished === true)
   },
   notFinishedData(data) {
-    console.log(data.filter(todo => !todo.isFinished === true))
     return data.filter(todo => !todo.isFinished === true)
   }
 })

@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 2,
 			"list": [
 				{
 					"id": 0,
@@ -38,10 +38,16 @@
 					"query": "id=241018"
 				},
 				{
-					"id": -1,
+					"id": 1,
 					"name": "todos",
-					"pathName": "pages/index/index",
+					"pathName": "pages/todos/todos",
 					"query": ""
+				},
+				{
+					"id": 2,
+					"name": "create todo",
+					"pathName": "pages/todoDetails/todoDetails",
+					"query": "id=-1"
 				}
 			]
 		}

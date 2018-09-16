@@ -27,7 +27,7 @@
       </view>
     </view>
 
-    <button wx:if="{{curId != -1}}" size="mini" plain class='delete-btn' bindtap='deleteItem'>删除</button>
-    <button wx:else size="mini" plain class='done-btn' bindtap='saveItem'>保存</button>
+    <button wx:if="{{curId != -1}}" size="mini" plain hover-class='todo-btn-hover' class='delete-btn' bindtap='deleteItem'>删除</button>
+    <button wx:else size="mini" plain class='done-btn' hover-class='todo-btn-hover' bindtap='saveItem'>保存</button>
   </view>
 </view>

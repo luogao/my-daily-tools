@@ -1,5 +1,7 @@
 const app = getApp()
 const util = require('../../utils/util.js')
+const Todo = require('../../model/todos.js')
+const AV = require('../../libs/av-weapp-min.js')
 
 Page({
   data: {
@@ -10,13 +12,11 @@ Page({
     remarksFormFocus: false,
     titleFormFocus: false,
     itemValue: {
-      title: null,
-      deadline: null,
+      title: '',
+      deadline: '',
       isFinished: false,
-      remarks: null,
-      uId: null,
-      createAt: null,
-      finishAt: null
+      remarks: '',
+      finishAt: ''
     },
     editValue: {
       title: null,
@@ -144,30 +144,30 @@ Page({
     let self = this
     let tempData = this.data.itemValue
     let tempFullData = this.data.fullData.slice()
+    if (!tempData.title) return
     wx.showLoading({
       title: "保存中...",
       mask: true,
     })
-    tempData.uId = this.data.fullData.length === 0 ? 0 : this.data.fullData[this.data.fullData.length - 1].uId + 1
-    tempData.createAt = Date.now()
     tempFullData.push(tempData)
     console.log(tempData)
-    util.Store.save(tempFullData, function () {
-      util.Store.fetch(function (data) {
-        self.setData({
-          fullData: data.data,
-          curId: tempData.uId,
-          itemValue: tempData
-        })
-        wx.hideLoading()
-        wx.showToast({
-          title: '成功',
-          icon: 'success',
-          duration: 1000
-        })
-        tempData = null
+    new Todo({
+      ...tempData,
+      user: AV.User.current()
+    }).save().then(todo => {
+      console.log(todo)
+      self.setData({
+        fullData: data.data,
+        curId: tempData.uId,
+        itemValue: tempData
       })
-    })
+      wx.hideLoading()
+      wx.showToast({
+        title: '成功',
+        icon: 'success',
+        duration: 1000
+      })
+    }).catch(console.log)
   },
   deleteItem() {
     let self = this

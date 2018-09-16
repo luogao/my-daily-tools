@@ -55,6 +55,7 @@
 
 .tool-item-hover {
   box-shadow: none;
+  transform: translateY(3px);
 }
 
 .location-block {

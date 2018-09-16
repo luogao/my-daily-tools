@@ -12,5 +12,5 @@
       </scroll-view>
     </swiper-item>
   </swiper>
-  <button bindtap="createNew" size="mini" plain class='create-btn'>新建</button>
+  <button bindtap="createNew" size="mini" plain class='create-btn' hover-class='todo-btn-hover'>新建</button>
 </view>
