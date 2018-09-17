@@ -2,6 +2,7 @@
 //获取应用实例
 const app = getApp()
 const util = require('../../utils/util.js')
+const AV = require('../../libs/av-weapp-min.js')
 
 Page({
   data: {
@@ -13,31 +14,39 @@ Page({
   },
   //事件处理函数
   itemClickHandler: function(e) {
+    console.log(e.detail.currentTarget.dataset.id)
     wx.navigateTo({
-      url: `../todoDetails/todoDetails?id=${e.detail.currentTarget.dataset.uid}`
+      url: `../todoDetails/todoDetails?id=${e.detail.currentTarget.dataset.id}`
     })
   },
   fetchData(cb) {
     wx.showLoading({
       title: '加载中 ...',
     })
-    const fullData = wx.getStorageSync('todolist') || []
-    const processedData = fullData.map(el => {
-      el.createAt = util.formatTime(new Date(el.createAt))
-      el.finishAt = el.finishAt ? util.formatTime(new Date(el.finishAt)) : null
-      el.deadline = el.deadline ? el.deadline.replace(/-/g, '/') : null
-      el.checked = false
-      return el
-    })
-    processedData.reverse()
-    this.setData({
-      'listData.finished': this.finishedData(processedData.reverse()),
-      'listData.notFinished': this.notFinishedData(processedData.reverse())
-    })
+    const query = new AV.Query('Todo')
+      .equalTo('user', AV.User.current())
+      .descending('createdAt')
+      .find()
+    query.then((data) => {
+      this.setTodos(data)
+    }).catch(console.error)
     wx.hideLoading()
-    if (typeof cb === "function") {
-      cb()
-    }
+  },
+  setTodos(todos) {
+    const fullData = todos.slice() || []
+    const processedData = fullData.map(el => {
+      const _el = el.toJSON()
+      _el.createdTime = util.formatTime(new Date(_el.createdAt))
+      _el.finishAt = _el.finishAt ? util.formatTime(new Date(_el.finishAt)) : ''
+      _el.deadline = _el.deadline ? _el.deadline.replace(/-/g, '/') : ''
+      _el.checked = false
+      return _el
+    })
+    console.log(processedData)
+    this.setData({
+      'listData.finished': this.finishedData(processedData),
+      'listData.notFinished': this.notFinishedData(processedData)
+    })
   },
   onReady() {
     this.fetchData()

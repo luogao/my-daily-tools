@@ -20,7 +20,7 @@ Component({
   data: {
   },
   ready() {
-    const list = this.data.todos.filter(todo => this.data.finish ? todo.isFinished : !todo.isFinished)
+    // const list = this.data.todos.filter(todo => this.data.finish ? todo.isFinished : !todo.isFinished)
   },
   /**
    * 组件的方法列表
@@ -28,6 +28,7 @@ Component({
   methods: {
     itemClick(e) {
       this.triggerEvent('itemclick', e)
+      console.log(this.data.todos)
     }
   }
 })
