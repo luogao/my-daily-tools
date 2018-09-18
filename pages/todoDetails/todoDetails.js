@@ -21,7 +21,8 @@ Page({
     editValue: {
       title: null,
       remarks: null,
-    }
+    },
+    originalItem: null
   },
   getToday() {
     let date = new Date()
@@ -63,33 +64,31 @@ Page({
       console.log(data)
       wx.hideLoading()
       self.setData({
-        itemValue: data
+        itemValue: data,
+        originalItem: res
       })
     })
   },
   editItem(key, data) {
     let self = this
     if (self.data.curId === -1) return
+    console.log(key, data)
     if (self.data.itemValue[key] === data || self.data.editValue[key] === data) {
       return
     } else {
-      if (self.data.curId != -1 && self.data.curId) {
-        tempFullData[index][key] = data
-        wx.showLoading({
-          title: "编辑中...",
-          mask: true,
+      wx.showLoading({
+        title: "编辑中...",
+        mask: true,
+      })
+      self.data.originalItem.set(key, data).save().then(res => {
+        wx.hideLoading()
+        wx.showToast({
+          title: '编辑成功',
+          icon: 'success',
+          duration: 1000
         })
-        util.Store.save(tempFullData, function() {
-          util.Store.fetch(function(data) {
-            wx.hideToast()
-            wx.showToast({
-              title: '编辑成功',
-              icon: 'success',
-              duration: 1000
-            })
-          })
-        })
-      }
+      })
+
     }
   },
   //时间更改，保存、修改
