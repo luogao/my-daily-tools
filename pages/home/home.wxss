@@ -13,12 +13,37 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  animation: fadeIn 0.5s;
+  height: 132rpx;
+  font-weight: 300;
 }
 
-.userinfo-block image {
+.userinfo-block .user-avatar {
   width: 132rpx;
   height: 132rpx;
   border-radius: 50%;
+  overflow: hidden;
+  animation: fadeIn 0.5s;
+}
+
+button.default-avatar-btn {
+  margin: 0;
+  border: none;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-size: 72rpx;
+  line-height: unset;
+  animation: fadeIn 0.5s;
+}
+
+.default-avatar {
+  width: 132rpx;
+  height: 132rpx;
+  border-radius: 50%;
+  display: block;
   overflow: hidden;
 }
 

@@ -1,9 +1,20 @@
 <!--pages/home/home.wxml-->
 <view class="home">
-  <view class='page-block' wx:if="{{userName}}">
+  <view class='page-block'>
     <view class='userinfo-block'>
-      <text>{{userName}}</text>
-      <image mode="aspectFit" src="{{avatar}}"></image>
+      <block wx:if="{{dataLoaded}}">
+        <block wx:if="{{!isNeedUpdate}}">
+          <text>{{userName}}</text>
+          <image class='user-avatar' wx:if="{{userName}}" mode="aspectFit" src="{{avatar}}"></image>
+        </block>
+        <block wx:else>
+          <button class='default-avatar-btn' open-type='getUserInfo' bindgetuserinfo='handleGetUserInfo' plain>
+            <text>点击登录</text>
+            <image class='default-avatar' mode='widthFix' src="{{defaultAvatar}}"></image>
+          </button>
+        </block>
+      </block>
+      <text wx:else>Loading...</text>
     </view>
     <view class="location-block {{curLocation? 'hasdata': ''}}">
       <image mode="widthFix" src="../../images/location.svg"></image>

@@ -16,70 +16,80 @@ Page({
     }, {
       imgSrc: '../../images/movie.svg',
       page: 'movieList'
-    }]
+    }],
+    defaultAvatar: '../../images/default_avatar.svg',
+    dataLoaded: false,
+    isNeedUpdate: false
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function(options) {},
+  onReady() {
+    this.login()
+  },
+  handleGetUserInfo(res) {
+    if (!res.detail.errMsg.includes('fail auth deny')) {
+      this.updateUserInfo(res.detail.userInfo)
+    }
+  },
+  login() {
+    const self = this
+    AV.User.loginWithWeapp().then(user => {
+      const _user = user.toJSON()
+      self.setData({
+        userName: _user.nickName ? _user.nickName : '',
+        avatar: _user.avatarUrl ? _user.avatarUrl : '',
+        dataLoaded: true,
+        isNeedUpdate: _user.nickName ? false : true
+      })
+    }).catch(err => {
+      console.error(err)
+      wx.hideLoading()
+    });
+  },
+  updateUserInfo(userInfo) {
     const self = this
     wx.showLoading({
       title: "加载中...",
       mask: true
     })
-    AV.User.loginWithWeapp().then(user => {
-      const _user = user.toJSON()
-      this.setData({
-        userName: _user.nickName ? _user.nickName : '',
-        avatar: _user.avatarUrl ? _user.avatarUrl : ''
+    const user = AV.User.current();
+    // 更新当前用户的信息
+    user.set(userInfo).save().then(res => {
+      console.log(res)
+      const _res = res.toJSON()
+      self.setData({
+        userName: _res.nickName,
+        avatar: _res.avatarUrl,
+        isNeedUpdate: false
       })
       wx.hideLoading()
-    }).catch(console.error);
+      wx.showToast({
+        title: '登录成功',
+        icon: 'none',
+        duration: 500
+      })
+    }).catch(err => {
+      console.log(err)
+      wx.hideLoading()
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function() {
 
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
   onHide: function() {
 
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
   onUnload: function() {
 
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
   onPullDownRefresh: function() {
 
   },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
   onReachBottom: function() {
 
   },
-  /**
-   * 用户点击右上角分享
-   */
   onShareAppMessage: function() {
 
   },
