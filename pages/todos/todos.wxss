@@ -1,19 +1,31 @@
-.lists-container{
+.lists-container {
   height: 100%;
 }
+
 button.create-btn {
   position: fixed;
-  bottom: 60rpx;
   background: #63d47a;
   color: #fff;
   width: 290rpx;
   height: 90rpx;
   line-height: 90rpx;
   font-size: 36rpx;
-  right: 40rpx;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
   border: 0px;
   box-shadow: 4rpx 16rpx 40rpx 0 rgba(31, 32, 68, 0.25);
-  transition: all .2s;
+  transition: all 0.3s;
+  margin: 0;
+  transform: translate3d(calc(100vw - 100% - 40rpx),calc(100vh - 100% - 40rpx),0);
+}
+
+button.create-btn.no-data {
+  transform: translate3d(-50%,0,0);
+  right: 0;
+  left: 50%;
+  top: 50vh;
 }
 
 .actions-container {
@@ -64,10 +76,10 @@ swiper {
   height: 100vh;
 }
 
-.todos-no-date{
-  margin-top:calc(100vh / 2 - 200rpx);
+.todos-no-data {
+  margin-top: calc(100vh / 2 - 200rpx);
   text-align: center;
-  font-size: 16px; 
+  font-size: 16px;
   color: #ccc;
   animation: fadeIn 1s;
 }

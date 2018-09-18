@@ -27,13 +27,11 @@ Page({
       title: "加载中...",
       mask: true
     })
-
     AV.User.loginWithWeapp().then(user => {
       this.setData({
         userName: user.toJSON().nickName,
         avatar: user.toJSON().avatarUrl
       })
-      console.log(user)
       wx.hideLoading()
     }).catch(console.error);
   },
@@ -44,7 +42,6 @@ Page({
   onReady: function() {
 
   },
-
   /**
    * 生命周期函数--监听页面显示
    */

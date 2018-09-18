@@ -108,7 +108,7 @@ Page({
     this.editItem("title", e.detail.value)
     this.setData({
       "itemValue.title": e.detail.value,
-      "editValue.title": null
+      "editValue.title": ''
     })
   },
   // Remark绑定失焦事件 保存/编辑
@@ -116,14 +116,13 @@ Page({
     this.editItem("remarks", e.detail.value)
     this.setData({
       "itemValue.remarks": e.detail.value,
-      "editValue.remarks": null
+      "editValue.remarks": ''
     })
   },
   //Title点击text元素开始出现表单元素开始编辑
   editItemTitle: function(e) {
     this.setData({
       "editValue.title": this.data.itemValue.title,
-      "itemValue.title": null,
       titleFormFocus: true
     })
   },
@@ -131,7 +130,6 @@ Page({
   editItemRemarks: function(e) {
     this.setData({
       "editValue.remarks": this.data.itemValue.remarks,
-      "itemValue.remarks": null,
       remarksFormFocus: true
     })
   },
@@ -168,15 +166,12 @@ Page({
       content: '请确认是否继续！',
       success: function(res) {
         if (res.confirm) {
-          console.log('用户点击确定')
           wx.showLoading({
             title: "删除中...",
             mask: true,
           })
           self.handleDelete(self.data.itemValue.objectId)
-        } else if (res.cancel) {
-          console.log('用户点击取消')
-        }
+        } else if (res.cancel) {}
       }
     })
   },
@@ -198,9 +193,14 @@ Page({
           }, 300)
         }
       })
-    }, function(error) {
+    }).catch(function(error) {
       // 异常处理
-      console.log('000')
+      wx.hideLoading()
+      wx.showToast({
+        title: '删除失败',
+        icon: 'none',
+        duration: 1000
+      })
     });
   },
 })

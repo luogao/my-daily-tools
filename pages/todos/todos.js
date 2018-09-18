@@ -10,7 +10,13 @@ Page({
       finished: [],
       notFinished: []
     },
-    currentPage: 0
+    currentPage: 0,
+    dataLoaded: false
+  },
+  swiperChangeHandler(res) {
+    this.setData({
+      currentPage: res.detail.current
+    })
   },
   //事件处理函数
   itemClickHandler: function(e) {
@@ -27,11 +33,20 @@ Page({
       .equalTo('user', AV.User.current())
       .descending('createdAt')
       .find()
-    query.then((data) => {
-      this.setTodos(data)
-      typeof cb === 'function' && cb()
-    }).catch(console.error)
-    wx.hideLoading()
+      .then((data) => {
+        this.setTodos(data)
+        typeof cb === 'function' && cb()
+        this.setData({
+          dataLoaded: true
+        })
+        wx.hideLoading()
+      }).catch((err) => {
+        console.error(err)
+        wx.hideLoading()
+        wx.showToast({
+          title: 'Load fail',
+        })
+      })
   },
   setTodos(todos) {
     const fullData = todos.slice() || []
@@ -68,5 +83,11 @@ Page({
   },
   notFinishedData(data) {
     return data.filter(todo => !todo.isFinished === true)
+  },
+  test() {
+    console.log(1)
+  },
+  test1() {
+    console.log(2)
   }
 })

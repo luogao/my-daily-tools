@@ -1,7 +1,7 @@
 .action-form {
   width: 100%;
   box-sizing: border-box;
-  padding:20rpx;
+  padding: 20rpx;
 }
 
 .action-form .form-item {
@@ -27,13 +27,16 @@
 .form-item input, .picker, .form-item textarea {
   font-size: 48rpx;
 }
-.details-item{
+
+.details-item {
   font-size: 48rpx;
 }
-.details-item.details-title{
+
+.details-item.details-title {
   height: 72rpx;
 }
-.details-item.picker{
+
+.details-item.picker {
   padding: 0;
 }
 
@@ -45,30 +48,25 @@
   display: block;
 }
 
-button.done-btn {
+button.done-btn, button.delete-btn {
   position: fixed;
-  bottom: 60rpx;
-  background: #63d47a;
-  color: #fff;
-  width: 190rpx;
-  height: 90rpx;
-  right: 40rpx;
-  line-height: 90rpx;
-  font-size: 36rpx;
-  border: 0px;
-  box-shadow: 4rpx 16rpx 40rpx 0 rgba(31, 32, 68, 0.25);
-}
-
-button.delete-btn {
-  position: fixed;
-  bottom: 60rpx;
   background: #ff0302;
   color: #fff;
   width: 190rpx;
   height: 90rpx;
-  right: 40rpx;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
   line-height: 90rpx;
   font-size: 36rpx;
   border: 0px;
   box-shadow: 4rpx 16rpx 40rpx 0 rgba(31, 32, 68, 0.25);
+  transform: translate3d(calc(100vw - 100% - 40rpx), calc(100vh - 100% - 40rpx), 0);
+  margin: 0;
+  transition: top .3s,box-shadow .3s;
+}
+
+button.done-btn {
+  background: #63d47a;
 }
