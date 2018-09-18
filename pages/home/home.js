@@ -28,9 +28,10 @@ Page({
       mask: true
     })
     AV.User.loginWithWeapp().then(user => {
+      const _user = user.toJSON()
       this.setData({
-        userName: user.toJSON().nickName,
-        avatar: user.toJSON().avatarUrl
+        userName: _user.nickName ? _user.nickName : '',
+        avatar: _user.avatarUrl ? _user.avatarUrl : ''
       })
       wx.hideLoading()
     }).catch(console.error);
