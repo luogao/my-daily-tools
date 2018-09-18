@@ -29,6 +29,7 @@ Page({
       .find()
     query.then((data) => {
       this.setTodos(data)
+      typeof cb === 'function' && cb()
     }).catch(console.error)
     wx.hideLoading()
   },
@@ -42,7 +43,6 @@ Page({
       _el.checked = false
       return _el
     })
-    console.log(processedData)
     this.setData({
       'listData.finished': this.finishedData(processedData),
       'listData.notFinished': this.notFinishedData(processedData)
@@ -52,11 +52,15 @@ Page({
     this.fetchData()
   },
   onShow() {
-    this.fetchData()
+    if (app.globalData.isTodoNeedUpdate) {
+      this.fetchData(() => {
+        app.changeTodoUpdateState(false)
+      })
+    }
   },
   createNew() {
     wx.navigateTo({
-      url: '../todoDetails/todoDetails?id=-1'
+      url: '../todoDetails/todoDetails'
     })
   },
   finishedData(data) {

@@ -25,3 +25,12 @@ button.todo-btn-hover{
   transform: translateY(6px);
   box-shadow: 0 0 0 transparent !important;
 }
+
+@keyframes fadeIn{
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}

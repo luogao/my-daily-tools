@@ -16,7 +16,7 @@ Page({
       deadline: '',
       isFinished: false,
       remarks: '',
-      finishAt: ''
+      finishAt: 0
     },
     editValue: {
       title: null,
@@ -33,24 +33,21 @@ Page({
     return todayStr
   },
   onLoad: function(option) {
-    wx.showLoading({
-      title: "加载中...",
-      mask: true,
-    })
-    this.initData(option.id)
+    if (option.id) {
+      wx.showLoading({
+        title: "加载中...",
+        mask: true,
+      })
+      this.initData(option.id)
+    }
     this.setData({
       today: this.getToday()
     })
   },
   initData(id) {
     let self = this
-    if (id != -1) {
-      self.setData({
-        curId: id
-      })
+    if (id) {
       self.fetchData(id)
-    } else {
-      wx.hideLoading()
       self.setData({
         curId: id
       })
@@ -61,7 +58,6 @@ Page({
     const query = new AV.Query('Todo')
     query.get(id).then(res => {
       const data = res.toJSON()
-      console.log(data)
       wx.hideLoading()
       self.setData({
         itemValue: data,
@@ -71,8 +67,7 @@ Page({
   },
   editItem(key, data) {
     let self = this
-    if (self.data.curId === -1) return
-    console.log(key, data)
+    if (!self.data.curId) return;
     if (self.data.itemValue[key] === data || self.data.editValue[key] === data) {
       return
     } else {
@@ -82,13 +77,13 @@ Page({
       })
       self.data.originalItem.set(key, data).save().then(res => {
         wx.hideLoading()
+        app.changeTodoUpdateState(true)
         wx.showToast({
           title: '编辑成功',
           icon: 'success',
           duration: 1000
         })
       })
-
     }
   },
   //时间更改，保存、修改
@@ -143,22 +138,21 @@ Page({
   saveItem() {
     let self = this
     let tempData = this.data.itemValue
-    console.log(tempData)
     if (!tempData.title) return
     wx.showLoading({
       title: "保存中...",
       mask: true,
     })
-    console.log(tempData)
     new Todo({
       ...tempData,
       user: AV.User.current()
     }).save().then(todo => {
-      console.log(todo)
       self.setData({
         curId: todo.id,
-        itemValue: tempData
+        itemValue: tempData,
+        originalItem: todo
       })
+      app.changeTodoUpdateState(true)
       wx.hideLoading()
       wx.showToast({
         title: '成功',
@@ -190,7 +184,7 @@ Page({
     console.log(id)
     AV.Query.doCloudQuery(`delete from Todo where objectId="${id}"`).then(function() {
       // 删除成功
-      console.log(111)
+      app.changeTodoUpdateState(true)
       wx.hideLoading()
       wx.showToast({
         title: '已删除',
@@ -208,5 +202,5 @@ Page({
       // 异常处理
       console.log('000')
     });
-  }
+  },
 })

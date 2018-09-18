@@ -63,3 +63,11 @@ swiper {
   width: 100%;
   height: 100vh;
 }
+
+.todos-no-date{
+  margin-top:calc(100vh / 2 - 200rpx);
+  text-align: center;
+  font-size: 16px; 
+  color: #ccc;
+  animation: fadeIn 1s;
+}
