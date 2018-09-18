@@ -26,6 +26,13 @@ button.todo-btn-hover {
   box-shadow: 0 0 0 transparent !important;
 }
 
+button.no-data.todo-btn-hover {
+  transform: translate3d(-50%, 0, 0) !important;
+  right: 0 !important;
+  left: 50% !important;
+  top: calc(50vh + 12rpx) !important;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
