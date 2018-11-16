@@ -134,6 +134,9 @@ body {
   font-size: 24rpx;
   text-align: center;
   padding-top: 10rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .img-box {

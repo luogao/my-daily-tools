@@ -66,9 +66,8 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
   font-weight: 100;
+  display: block;
 }
 
 .movie-item-hover image {
