@@ -2,26 +2,30 @@
 <view class='movie-detail-container'>
   <view class='movie-basic-info'>
     <image src="{{detailData.basic.img}}" mode='widthFix' class="slide-image" />
-    <view class='movie-info-txt'>
-      <view>
-        <text class='movie-name'>{{detailData.basic.name}}</text>
+    <view class='first-screen-info'>
+      <view class='movie-info-txt'>
+        <view>
+          <text class='movie-name'>{{detailData.basic.name}}</text>
 
+        </view>
+        <view class='movie-commentSpecial' wx:if="{{detailData.basic.commentSpecial}}">{{detailData.basic.commentSpecial}}</view>
       </view>
-      <view class='movie-commentSpecial' wx:if="{{detailData.basic.commentSpecial}}">{{detailData.basic.commentSpecial}}</view>
-    </view>
-  </view>
-  <view class='movie-detail-info'>
-    <view>
-      <view class='movie-showtime' wx:if="{{showDate}}">上映：{{showDate?showDate:''}}
-        <text class='movie-area' wx:if="{{detailData.basic.releaseArea}}">({{detailData.basic.releaseArea}})</text>
+      <view class='movie-detail-info'>
+        <view>
+          <view class='movie-showtime' wx:if="{{showDate}}">上映：{{showDate?showDate:''}}
+            <text class='movie-area' wx:if="{{detailData.basic.releaseArea}}">({{detailData.basic.releaseArea}})</text>
+          </view>
+          <view class='movie-type' wx:if="{{detailData.basic.type}}">类型：{{detailData.basic.type}}</view>
+          <view class='movie-time' wx:if="{{detailData.basic.mins}}">时长：{{detailData.basic.mins}}</view>
+        </view>
+        <text class='movie-score'>
+          {{detailData.basic.overallRating != '-1' ? detailData.basic.overallRating :'无'}}
+        </text>
       </view>
-      <view class='movie-type' wx:if="{{detailData.basic.type}}">类型：{{detailData.basic.type}}</view>
-      <view class='movie-time' wx:if="{{detailData.basic.mins}}">时长：{{detailData.basic.mins}}</view>
     </view>
-    <text class='movie-score'>
-      {{detailData.basic.overallRating != '-1' ? detailData.basic.overallRating :'无'}}
-    </text>
+
   </view>
+
   <view class='movie-story'>
     <text class='section-title'>情节简述</text>
     <text class='movie-story-text'>{{detailData.basic.story}}</text>
@@ -36,7 +40,7 @@
       </view>
       <view class='movier-item' wx:for="{{detailData.basic.actors}}" wx:key wx:for-item="item">
         <view class='img-box' style='background-image:url({{item.img}})'>
-          
+
         </view>
         <text class='actor-name'>{{item.name?item.name : '未知'}}</text>
       </view>

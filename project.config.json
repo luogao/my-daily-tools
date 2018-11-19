@@ -29,13 +29,13 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 0,
 			"list": [
 				{
 					"id": 0,
 					"name": "电影详情",
 					"pathName": "pages/movieDetail/detail",
-					"query": "id=241018"
+					"query": "id=103937"
 				},
 				{
 					"id": 1,

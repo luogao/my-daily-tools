@@ -21,12 +21,11 @@ body {
   left: 0;
 }
 
-.movie-basic-info {}
-
 .movie-basic-info {
   overflow: hidden;
   position: relative;
   background: #000;
+  height: 100vh;
 }
 
 .movie-basic-info image {
@@ -34,14 +33,16 @@ body {
   z-index: 0;
 }
 
-.movie-basic-info .movie-info-txt {
+.movie-basic-info .first-screen-info {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   z-index: 9;
-  padding-left: 2%;
-  padding-right: 2%;
+}
+
+.movie-basic-info .movie-info-txt {
+  padding: 2%;
   box-sizing: border-box;
   color: #fff;
 }
@@ -51,6 +52,7 @@ body {
   font-size: 48rpx;
   text-align: left;
   padding-right: 20rpx;
+  line-height: 1;
 }
 
 .movie-info-txt .movie-name {
@@ -92,11 +94,10 @@ body {
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
 }
 
-.movie-story,
-.movie-actor,
-.movie-comment {
+.movie-story, .movie-actor, .movie-comment {
   padding-left: 2%;
   padding-right: 2%;
   box-sizing: border-box;
@@ -147,8 +148,6 @@ body {
   background-size: cover;
   background-position: center;
 }
-
-
 
 .movie-comment-item {
   font-size: 28rpx;
