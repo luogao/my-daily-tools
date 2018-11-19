@@ -63,14 +63,19 @@ button.default-avatar-btn {
   padding: 40rpx;
   box-sizing: border-box;
   transition: all 0.3s;
+  animation: pulse 15s linear infinite;
 }
 
 .tool-block-item:nth-child(1) {
-  background-color: #51adcf;
+  background-color: #31a6df;
 }
 
 .tool-block-item:nth-child(2) {
-  background-color: #a5ecd7;
+  background-color: #da4c00;
+}
+
+.tool-block-item:nth-child(3) {
+  background-color: #7475c6;
 }
 
 .tool-block-item image {
@@ -118,4 +123,14 @@ button.default-avatar-btn {
 
 .action-block .delete-btn image {
   width: 40rpx;
+}
+
+@keyframes pulse {
+  from {
+    filter: hue-rotate(0);
+  }
+
+  to {
+    filter: hue-rotate(360deg);
+  }
 }

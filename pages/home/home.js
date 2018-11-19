@@ -16,6 +16,9 @@ Page({
     }, {
       imgSrc: '../../images/movie.svg',
       page: 'movieList'
+    }, {
+      imgSrc: '../../images/shelf-life-icon.svg',
+      page: 'shelfLife'
     }],
     defaultAvatar: '../../images/default_avatar.svg',
     dataLoaded: false,

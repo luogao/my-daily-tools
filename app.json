@@ -4,7 +4,8 @@
     "pages/todos/todos",
     "pages/movieList/movieList",
     "pages/movieDetail/detail",
-    "pages/todoDetails/todoDetails"
+    "pages/todoDetails/todoDetails",
+    "pages/shelfLife/shelfLife"
   ],
   "window": {
     "backgroundTextStyle": "light",
