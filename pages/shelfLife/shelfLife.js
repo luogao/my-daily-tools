@@ -7,6 +7,7 @@ Page({
     expireDate: '',
     dayLeftTip: '',
     shelfLifeUnit: 'month',
+    isTyping: false,
     shelfLifeUnitOptions: [{
       value: 'day',
       name: '天'
@@ -77,7 +78,22 @@ Page({
   },
   handleShelflifeInput(e) {
     this.setData({
-      shelflifeValue: e.detail.value
+      shelflifeValue: e.detail.value || 0
+    })
+  },
+  handleInputBlur() {
+    this.setData({
+      isTyping: false
+    })
+  },
+  handleInputFocus() {
+    this.setData({
+      isTyping: true
+    })
+  },
+  startTyping() {
+    this.setData({
+      isTyping: true
     })
   }
 })

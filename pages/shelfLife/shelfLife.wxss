@@ -17,11 +17,15 @@
   align-items: center;
 }
 
-.shelf-life-value, .unit-radio-group {
+.shelf-life-value, .unit-radio-group, .shelf-life-value-text {
   flex-shrink: 0;
 }
 
-.shelf-life-value-input, .unit-radio-group {
+.shelf-life-value-text {
+  flex: 1;
+}
+
+.shelf-life-value-input, .unit-radio-group, .shelf-life-value-text {
   margin-left: 10rpx;
 }
 
@@ -43,6 +47,6 @@
   justify-content: center;
 }
 
-.has-result{
+.has-result {
   font-weight: 500;
 }

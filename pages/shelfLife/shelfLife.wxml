@@ -13,7 +13,10 @@
       <view class='shelf-life-value'>
         保质期:
       </view>
-      <input value='{{shelflifeValue}}' class='shelf-life-value-input' bindinput='handleShelflifeInput' type='number'></input>
+      <block>
+        <view bindtap='startTyping' class='shelf-life-value-text' wx:if='{{!isTyping}}'>{{shelflifeValue}}</view>
+        <input focus="{{isTyping}}" bindblur="handleInputBlur" bindfocus="handleInputFocus" wx:else value='{{shelflifeValue === 0 ? "" :shelflifeValue}}' class='shelf-life-value-input' bindinput='handleShelflifeInput' type='number'></input>
+      </block>
       <radio-group class="unit-radio-group" bindchange="radioChange">
         <label wx:key wx:for="{{shelfLifeUnitOptions}}">
           <radio color="#ccc" value="{{item.value}}" checked="{{item.checked}}" />{{item.name}}
@@ -31,8 +34,8 @@
     </view>
   </view>
   <view class='action-btn-group'>
-    <button disabled='{{!productionDate && !shelflifeValue}}' plain bindtap='reset'>重置</button>
-    <button disabled='{{!productionDate && !shelflifeValue}}' plain bindtap='calculate'>计算</button>
+    <button disabled='{{!productionDate || !shelflifeValue}}' plain bindtap='reset'>重置</button>
+    <button disabled='{{!productionDate || !shelflifeValue}}' plain bindtap='calculate'>计算</button>
   </view>
 
 </view>

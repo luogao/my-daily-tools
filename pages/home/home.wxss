@@ -63,7 +63,7 @@ button.default-avatar-btn {
   padding: 40rpx;
   box-sizing: border-box;
   transition: all 0.3s;
-  animation: pulse 15s linear infinite;
+  /* animation: pulse 15s linear infinite; */
 }
 
 .tool-block-item:nth-child(1) {
