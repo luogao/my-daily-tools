@@ -5,27 +5,16 @@
       <view class='todos-no-data' wx:if="{{!listData.notFinished.length}}">
         <view>No Data</view>
       </view>
-      <scroll-view wx:else scroll-y="true" class='lists-container'>
-        <todolist binditemclick="itemClickHandler" todos="{{listData.notFinished}}"></todolist>
-      </scroll-view>
+      <todolist wx:else binditemclick="itemClickHandler" todos="{{listData.notFinished}}"></todolist>
     </swiper-item>
     <swiper-item>
       <view class='todos-no-data' wx:if="{{!listData.finished.length}}">
         <view>No Data</view>
       </view>
-      <scroll-view wx:else scroll-y="true" class='lists-container'>
-        <todolist binditemclick="itemClickHandler" todos="{{listData.finished}}"></todolist>
-      </scroll-view>
+      <todolist wx:else binditemclick="itemClickHandler" todos="{{listData.finished}}"></todolist>
     </swiper-item>
   </swiper>
-  <button
-    bindtap="createNew" 
-    size="mini" 
-    plain 
-    class='create-btn {{(currentPage === 0 && listData.notFinished.length === 0) || (currentPage === 1 && listData.finished.length === 0)  ? "no-data" : ""}}' 
-    hover-class='todo-btn-hover' 
-    wx:if="{{dataLoaded}}"
-  >
+  <button bindtap="createNew" size="mini" plain class='create-btn {{(currentPage === 0 && listData.notFinished.length === 0) || (currentPage === 1 && listData.finished.length === 0)  ? "no-data" : ""}}' hover-class='todo-btn-hover' wx:if="{{dataLoaded}}">
     新建
   </button>
 </view>

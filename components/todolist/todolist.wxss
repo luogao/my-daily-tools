@@ -1,4 +1,6 @@
-/* components/todoList/todolist.wxss */
+.lists-container {
+  height: 100%;
+}
 
 .list-item-wrap {
   width: 100%;
@@ -7,6 +9,10 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 20rpx;
+}
+
+.lists-container .list-item-wrap:last-child {
+  padding-bottom: 200rpx;
 }
 
 .list-item {
@@ -29,7 +35,7 @@
 }
 
 .list-item.not-finish {
-  border-top-color:#ff0302;
+  border-top-color: #ff0302;
 }
 
 .list-item .item-title {
