@@ -1,1 +1,48 @@
 /* pages/shelfLife/shelfLife.wxss */
+
+.section-label, .shelf-lift-wrapper {
+  padding: 0 4%;
+  padding-bottom: 60rpx;
+  font-size: 36rpx;
+  font-weight: 100;
+}
+
+.shelf-life-value-input {
+  font-size: 36rpx;
+  font-weight: 100;
+}
+
+.shelf-lift-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.shelf-life-value, .unit-radio-group {
+  flex-shrink: 0;
+}
+
+.shelf-life-value-input, .unit-radio-group {
+  margin-left: 10rpx;
+}
+
+.action-btn-group {
+  padding: 0 4%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.action-btn-group button {
+  color: #000;
+  border-color: currentColor;
+  font-weight: 100;
+  width: 30vw;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.has-result{
+  font-weight: 500;
+}

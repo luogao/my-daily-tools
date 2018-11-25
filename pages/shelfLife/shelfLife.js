@@ -1,66 +1,83 @@
 // pages/shelfLife/shelfLife.js
+const dayjs = require('dayjs')
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
+    productionDate: '',
+    shelflifeValue: 0,
+    expireDate: '',
+    dayLeftTip: '',
+    shelfLifeUnit: 'month',
+    shelfLifeUnitOptions: [{
+      value: 'day',
+      name: '天'
+    }, {
+      value: 'month',
+      name: '月',
+      checked: true
+    }, {
+      value: 'year',
+      name: '年'
+    }]
+  },
+  onLoad: function(options) {
 
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+  onReady: function() {
 
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
+  onShow: function() {
 
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
+  onHide: function() {
 
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
+  onUnload: function() {
 
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
+  handleProductionDateSelected(e) {
+    this.setData({
+      productionDate: e.detail.value
+    })
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
+  radioChange(e) {
+    this.setData({
+      shelfLifeUnit: e.detail.value
+    })
   },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
+  calculate() {
+    const {
+      productionDate,
+      shelflifeValue,
+      shelfLifeUnit
+    } = this.data
+    const result = dayjs(productionDate).add(Number(shelflifeValue), shelfLifeUnit).format('YYYY-MM-DD')
+    const dayLeft = dayjs(result).diff(dayjs(), 'day')
+    console.log(dayLeft)
+    this.setData({
+      expireDate: result,
+      dayLeftTip: this.getDayLeftTip(dayLeft)
+    })
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  getDayLeftTip(dayLeft) {
+    if (dayLeft === 0) {
+      return `⚠️该物品今天过期，尽量不要使用`
+    }
+    if (dayLeft < 0) {
+      return `⚠️该物品已经过期，请丢弃`
+    }
+    return `该物品还剩${dayLeft}天过期`
+  },
+  reset() {
+    this.setData({
+      productionDate: '',
+      shelflifeValue: 0,
+      expireDate: '',
+      dayLeftTip: ''
+    })
+  },
+  handleShelflifeInput(e) {
+    this.setData({
+      shelflifeValue: e.detail.value
+    })
   }
 })

@@ -33,6 +33,12 @@ button.no-data.todo-btn-hover {
   top: calc(50vh + 12rpx) !important;
 }
 
+button[plain] {
+  margin: 0;
+  padding: 0;
+  line-height: unset;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

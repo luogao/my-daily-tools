@@ -1,2 +1,38 @@
-<!--pages/shelfLife/shelfLife.wxml-->
-<text>pages/shelfLife/shelfLife.wxml</text>
+<view class='shelf-life'>
+
+  <view class='form-item-wrapper'>
+    <picker mode="date" bindchange='handleProductionDateSelected'>
+      <view class='section-label'>
+        生产日期:
+        <text class='production-data-value'>{{productionDate}}</text>
+      </view>
+    </picker>
+  </view>
+  <view class='form-item-wrapper'>
+    <view class='shelf-lift-wrapper'>
+      <view class='shelf-life-value'>
+        保质期:
+      </view>
+      <input value='{{shelflifeValue}}' class='shelf-life-value-input' bindinput='handleShelflifeInput' type='number'></input>
+      <radio-group class="unit-radio-group" bindchange="radioChange">
+        <label wx:key wx:for="{{shelfLifeUnitOptions}}">
+          <radio color="#ccc" value="{{item.value}}" checked="{{item.checked}}" />{{item.name}}
+        </label>
+      </radio-group>
+    </view>
+  </view>
+  <view class='expire-result'>
+    <view class='section-label'>
+      到期时间:
+      <text class='{{expireDate ? "has-result" : ""}}'>{{expireDate || '待计算'}}</text>
+    </view>
+    <view class='section-label' wx:if="{{dayLeftTip}}">
+      <text class='has-result'>{{dayLeftTip}}</text>
+    </view>
+  </view>
+  <view class='action-btn-group'>
+    <button disabled='{{!productionDate && !shelflifeValue}}' plain bindtap='reset'>重置</button>
+    <button disabled='{{!productionDate && !shelflifeValue}}' plain bindtap='calculate'>计算</button>
+  </view>
+
+</view>
