@@ -1,10 +1,16 @@
 <view class='shelf-life'>
+  <view class='form-item-wrapper'>
+    <view class='production-name-wrapper'>
+      物品名称:
+      <input value='{{productionName}}' class='production-name-value-input' bindinput='handleProdutionNameInput'></input>
+    </view>
 
+  </view>
   <view class='form-item-wrapper'>
     <picker mode="date" bindchange='handleProductionDateSelected'>
       <view class='section-label'>
         生产日期:
-        <text class='production-data-value'>{{productionDate}}</text>
+        <text class='production-date-value'>{{productionDate}}</text>
       </view>
     </picker>
   </view>

@@ -2,6 +2,7 @@
 const dayjs = require('dayjs')
 Page({
   data: {
+    productionName: '',
     productionDate: '',
     shelflifeValue: 0,
     expireDate: '',
@@ -52,7 +53,7 @@ Page({
       shelfLifeUnit
     } = this.data
     const result = dayjs(productionDate).add(Number(shelflifeValue), shelfLifeUnit).format('YYYY-MM-DD')
-    const dayLeft = dayjs(result).diff(dayjs().format('YYYY-MM-DD'), 'day',true)
+    const dayLeft = dayjs(result).diff(dayjs().format('YYYY-MM-DD'), 'day', true)
     this.setData({
       expireDate: result,
       dayLeftTip: this.getDayLeftTip(dayLeft)
@@ -60,15 +61,15 @@ Page({
   },
   getDayLeftTip(dayLeft) {
     if (dayLeft === 0) {
-      return `⚠️该物品今天过期，尽量不要使用`
+      return `⚠️${this.data.productionName}今天过期，尽量不要使用`
     }
     if (dayLeft === 1) {
-      return `⚠️该物品明天过期，尽量今天使用`
+      return `⚠️${this.data.productionName}明天过期，尽量今天使用`
     }
     if (dayLeft < 0) {
-      return `⚠️该物品已经过期，请丢弃`
+      return `⚠️${this.data.productionName}已经过期，请丢弃`
     }
-    return `该物品还剩${dayLeft}天过期`
+    return `${this.data.productionName}还剩${dayLeft}天过期`
   },
   reset() {
     this.setData({
@@ -96,6 +97,11 @@ Page({
   startTyping() {
     this.setData({
       isTyping: true
+    })
+  },
+  handleProdutionNameInput(e) {
+    this.setData({
+      productionName: e.detail.value
     })
   }
 })

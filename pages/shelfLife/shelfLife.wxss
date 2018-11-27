@@ -1,6 +1,6 @@
 /* pages/shelfLife/shelfLife.wxss */
 
-.section-label, .shelf-lift-wrapper {
+.section-label, .shelf-lift-wrapper, .production-name-wrapper {
   padding: 0 4%;
   padding-bottom: 60rpx;
   font-size: 36rpx;
@@ -12,7 +12,7 @@
   font-weight: 100;
 }
 
-.shelf-lift-wrapper {
+.shelf-lift-wrapper, .production-name-wrapper {
   display: flex;
   align-items: center;
 }
@@ -25,7 +25,8 @@
   flex: 1;
 }
 
-.shelf-life-value-input, .unit-radio-group, .shelf-life-value-text {
+.shelf-life-value-input, .unit-radio-group, .shelf-life-value-text,
+.production-name-value-input {
   margin-left: 10rpx;
 }
 
