@@ -130,7 +130,6 @@ Page({
     }).save().then(goods => {
       wx.hideLoading()
       wx.showToast({
-        title: '成功',
         icon: 'success',
         duration: 1000
       })
