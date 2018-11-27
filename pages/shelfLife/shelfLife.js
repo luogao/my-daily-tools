@@ -1,5 +1,8 @@
 // pages/shelfLife/shelfLife.js
 const dayjs = require('dayjs')
+const Goods = require('../../model/goods.js')
+const AV = require('../../libs/av-weapp-min.js')
+
 Page({
   data: {
     productionName: '',
@@ -58,6 +61,7 @@ Page({
       expireDate: result,
       dayLeftTip: this.getDayLeftTip(dayLeft)
     })
+    this.saveRecord()
   },
   getDayLeftTip(dayLeft) {
     if (dayLeft === 0) {
@@ -103,5 +107,33 @@ Page({
     this.setData({
       productionName: e.detail.value
     })
+  },
+  saveRecord() {
+    const {
+      productionName,
+      productionDate,
+      shelflifeValue,
+      expireDate,
+      shelfLifeUnit
+    } = this.data
+    wx.showLoading({
+      title: 'saving record',
+      mask: true
+    })
+    new Goods({
+      productionName,
+      productionDate,
+      shelflifeValue,
+      expireDate,
+      shelfLifeUnit,
+      user: AV.User.current()
+    }).save().then(goods => {
+      wx.hideLoading()
+      wx.showToast({
+        title: '成功',
+        icon: 'success',
+        duration: 1000
+      })
+    }).catch(console.log)
   }
 })
