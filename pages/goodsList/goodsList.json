@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "物品记录",
+  "usingComponents": {
+    "goods-item": "/components/goodsItem/goodsItem"
+  }
+}

@@ -134,5 +134,10 @@ Page({
         duration: 1000
       })
     }).catch(console.log)
+  },
+  gotoGoodsList() {
+    wx.navigateTo({
+      url: '../goodsList/goodsList'
+    })
   }
 })

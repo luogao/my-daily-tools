@@ -1,0 +1,16 @@
+/* pages/goodsList/goodsList.wxss */
+
+.goods-list-wrapper {
+  padding-bottom: 40rpx;
+}
+
+button.to-shelflife-btn {
+  margin: 60rpx 4% 0;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: #80e7c1;
+  color: #fff;
+}

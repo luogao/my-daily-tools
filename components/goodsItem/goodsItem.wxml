@@ -1,0 +1,13 @@
+<view class="goods-item-wrapper">
+  <view class='goods-item'>
+    <view class='goods-item-header'>
+      <view class='goods-item-name'>{{goods.productionName}}</view>
+      <view class='goods-item-expire-date'>{{goods.dayLeft}}</view>
+    </view>
+    <view class='goods-item-body'>
+      <view class='goods-item-info goods-item-expire-tip'>{{goods.expireTip}}</view>
+      <view class='goods-item-info goods-item-production-date'>生产日期：{{goods.productionDate}}</view>
+      <view class='goods-item-info goods-item-shelflift'>保质期：{{goods.shelflifeValue}}{{goods.unitStr}}</view>
+    </view>
+  </view>
+</view>

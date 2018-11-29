@@ -44,4 +44,6 @@
     <button disabled='{{!productionDate || !shelflifeValue}}' plain bindtap='calculate'>计算</button>
   </view>
 
+  <button bindtap='gotoGoodsList' class='to-goods-list-btn' plain hover-class='my-hover-class'>查看物品记录</button>
+
 </view>

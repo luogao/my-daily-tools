@@ -1,0 +1,65 @@
+/* components/goodsItem/goodsItem.wxss */
+
+.goods-item-wrapper {
+  margin-bottom: 60rpx;
+}
+
+.goods-item:first-child {
+  margin-top: 4%;
+}
+
+.goods-item {
+  padding: 4%;
+  margin: 0 4%;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8rpx;
+}
+
+.goods-item-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20rpx;
+}
+
+.goods-item-name {
+  font-size: 48rpx;
+  font-weight: 300;
+  max-width: 520rpx;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.goods-item-expire-date {
+  flex-shrink: 0;
+  padding: 10rpx 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6rpx;
+  box-shadow: 0 4px 5px -3px rgba(0, 0, 0, 0.6);
+  background: #80e7c1;
+  color: #fff;
+}
+
+.goods-item-body {
+  padding-top: 20rpx;
+}
+
+.goods-item-info {
+  margin-bottom: 6rpx;
+  font-size: 28rpx;
+  font-weight: 100;
+}
+
+.goods-item-expire-tip {
+  font-weight: 200;
+}
+
+.goods-item-production-date {
+}
+
+.goods-item-shelflift {
+}
