@@ -17,7 +17,7 @@ const formatNumber = n => {
 }
 
 const Store = {
-  save(data, successCB, failCB, completeCB){
+  save(data, successCB, failCB, completeCB) {
     wx.setStorage({
       key: MY_STORE_KEY,
       data: data,
@@ -26,7 +26,7 @@ const Store = {
       complete: typeof completeCB === 'function' ? completeCB : null
     })
   },
-  fetch(successCB, failCB, completeCB){
+  fetch(successCB, failCB, completeCB) {
     wx.getStorage({
       key: MY_STORE_KEY,
       success: typeof successCB === 'function' ? successCB : null,
@@ -36,7 +36,42 @@ const Store = {
   }
 }
 
+const getImageInfo = src => new Promise((resolve, reject) => {
+  wx.getImageInfo({
+    src,
+    success(res) {
+      resolve(res)
+    },
+    fail(err) {
+      reject(err)
+    }
+  })
+})
+
+const simpleThrottle = function(fn, delay, atleast) {
+  let timer = null;
+  let previous = null;
+  // eslint-disable-next-line
+  return function () {
+    const now = +new Date();
+    if (!previous) previous = now;
+
+    if (now - previous > atleast) {
+      fn();
+      // 重置上一次开始时间为本次结束时间
+      previous = now;
+    } else {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        fn();
+      }, delay);
+    }
+  };
+}
+
 module.exports = {
   formatTime: formatTime,
-  Store : Store
+  Store: Store,
+  getImageInfo,
+  simpleThrottle
 }

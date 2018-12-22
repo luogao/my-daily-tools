@@ -1,2 +1,52 @@
-<!--pages/photoEditor/photoEditor.wxml-->
-<text>pages/photoEditor/photoEditor.wxml</text>
+<view>
+  
+  <view class='user-avatar-image-wrapper'>
+    <image src='{{userAvatar}}' class='user-avatar-image'></image>
+  </view>
+  <canvas class='main-photo' canvas-id='main-photo' style='width: {{mainPhotoSize}}px;height: {{mainPhotoSize}}px'></canvas>
+  <movable-area 
+    class='editor-area' 
+    catchtap='handleElementNotActive'>
+    <movable-view 
+      scale
+      animation="{{false}}"
+      bindchange="onElementChange" 
+      x="{{elementPosition.left}}" 
+      y="{{elementPosition.top}}" 
+      direction="all" 
+      catchtap='handleElementActive'
+      style='width: {{elementSize.width}}px;height: {{elementSize.height}}px;'
+      class='editor-element-wrapper'
+    >
+      <view 
+        style='transform: rotate({{elementRoate}}deg);' 
+        class='editor-element-wrapper-view {{elementActive? "active" : ""}}'
+      >
+        <view 
+          class='rotate-btn' 
+          catchtouchmove='handleRotate'
+          catchtouchstart='handleRotateStart'
+          catchtouchend='handleRotateEnd'
+        >
+          <image src='../../images/rotate-icon.png'></image>
+        </view>
+        <!-- <view
+          class='resize-btn' 
+          catchtouchmove='handleResize'
+          catchtouchstart='handleResizeStart'
+          catchtouchend='handleResizeEnd'
+        >
+          <image src='../../images/resize-icon.svg'></image>
+        </view> -->
+        <image class='hat-image' src='../../images/christmas-hat-1.png'></image>
+      </view>
+    </movable-view>
+  </movable-area>
+
+
+  <view class='actions-wrapper'>
+    <button hover-class='btn-hover' class='save-btn' plain bindtap='handleSave'>
+      保存
+    </button>
+  </view>
+</view>

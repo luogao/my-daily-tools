@@ -15,3 +15,7 @@ export const ROUTECONFIG = [{
   page: 'photoEditor',
   bgColor: '#ffe5e1'
 }]
+
+export const REFERENCESCREENSIZE = 375
+
+export const DEFAULTDECORATIONWIDTH = 100
