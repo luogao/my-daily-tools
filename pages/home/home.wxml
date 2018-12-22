@@ -26,7 +26,7 @@
       </view>
     </view>
     <view class='tool-block'>
-      <view data-page="{{item.page}}" catchtap="goPage" class='tool-block-item' wx:key wx:for-item="item" wx:for="{{tools}}" hover-class="tool-item-hover" hover-stay-time="50">
+      <view data-page="{{item.page}}" catchtap="goPage" class='tool-block-item' wx:key wx:for-item="item" wx:for="{{tools}}" hover-class="tool-item-hover" hover-stay-time="50" style='background-color: {{item.bgColor}}'>
         <image mode="aspectFit" src='{{item.imgSrc}}'></image>
       </view>
     </view>

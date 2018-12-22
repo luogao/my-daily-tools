@@ -6,7 +6,8 @@
     "pages/movieDetail/detail",
     "pages/todoDetails/todoDetails",
     "pages/shelfLife/shelfLife",
-    "pages/goodsList/goodsList"
+    "pages/goodsList/goodsList",
+    "pages/photoEditor/photoEditor"
   ],
   "window": {
     "backgroundTextStyle": "light",

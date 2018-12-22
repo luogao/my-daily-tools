@@ -1,5 +1,9 @@
 const app = getApp()
 const AV = require('../../libs/av-weapp-min.js');
+import {
+  ROUTECONFIG
+} from '../../constants/index.js'
+
 Page({
 
   /**
@@ -10,16 +14,7 @@ Page({
     userName: '',
     avatar: '',
     curLocation: '',
-    tools: [{
-      imgSrc: '../../images/todo.svg',
-      page: 'todos'
-    }, {
-      imgSrc: '../../images/movie.svg',
-      page: 'movieList'
-    }, {
-      imgSrc: '../../images/shelf-life-icon.svg',
-      page: 'shelfLife'
-    }],
+    tools: ROUTECONFIG,
     defaultAvatar: '../../images/default_avatar.svg',
     dataLoaded: false,
     isNeedUpdate: false
