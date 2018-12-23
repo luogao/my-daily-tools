@@ -1,5 +1,4 @@
 <view>
-  
   <view class='user-avatar-image-wrapper'>
     <image src='{{userAvatar}}' class='user-avatar-image'></image>
   </view>
@@ -8,15 +7,17 @@
     class='editor-area' 
     catchtap='handleElementNotActive'>
     <movable-view 
+      hidden="{{!hasElementData || !elementLoaded}}"
       scale
-      animation="{{false}}"
+      animation="false"
       bindchange="onElementChange" 
-      x="{{elementPosition.left}}" 
-      y="{{elementPosition.top}}" 
+      x="{{elementDefaultPosition.x}}" 
+      y="{{elementDefaultPosition.y}}" 
       direction="all" 
       catchtap='handleElementActive'
-      style='width: {{elementSize.width}}px;height: {{elementSize.height}}px;'
+      style='width: {{elementDefaultSize.width}}px;height: {{elementDefaultSize.height}}px;'
       class='editor-element-wrapper'
+      bindscale="handleScale"
     >
       <view 
         style='transform: rotate({{elementRoate}}deg);' 
@@ -38,7 +39,7 @@
         >
           <image src='../../images/resize-icon.svg'></image>
         </view> -->
-        <image class='hat-image' src='../../images/christmas-hat-1.png'></image>
+        <image bindload='handleElementLoad' class='hat-image' src='../../images/christmas-hat-1.png'></image>
       </view>
     </movable-view>
   </movable-area>

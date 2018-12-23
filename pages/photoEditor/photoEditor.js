@@ -49,38 +49,33 @@ Page({
   data: {
     mainPhotoSize: screenWidth,
     elementActive: true,
-    elementSize: {
+    elementDefaultSize: {
       width: 0,
       height: 0
     },
-    elementPosition: {
-      top: ININELEMENTSTYLE.top,
-      left: ININELEMENTSTYLE.left
+    elementDefaultPosition: {
+      x: 0,
+      y: 0
     },
     elementRoate: 0,
     elementTemp: 0,
-    userAvatar
+    userAvatar,
+    hasElementData: false,
+    elementLoaded: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    this.elementScale = 1
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-    // this.setElementPosition = simpleThrottle(this.setElementPosition, 100)
-    getImageInfo(hatPath).then(res => {
-      const scale = res.width / res.height
-      this.setData({
-        'elementSize.width': DEFAULTDECORATIONWIDTH * RPX,
-        'elementSize.height': DEFAULTDECORATIONWIDTH / scale * RPX,
-      })
-    }).catch(console.log)
+    this.getElementInfo(hatPath)
   },
 
   /**
@@ -110,23 +105,46 @@ Page({
   onShareAppMessage: function() {
 
   },
+  getElementInfo(path) {
+    getImageInfo(path).then(res => {
+      const scale = res.width / res.height
+      const width = DEFAULTDECORATIONWIDTH * RPX
+      const height = DEFAULTDECORATIONWIDTH / scale * RPX
+      const x = (screenWidth - width) / 2,
+        y = (screenWidth - height) / 2
+      this.elementWidth = width
+      this.elementHeight = height
+      this.setData({
+        'elementDefaultSize.width': width,
+        'elementDefaultSize.height': height,
+        'elementDefaultPosition.x': x,
+        'elementDefaultPosition.y': y,
+        hasElementData: true
+      })
+    }).catch(console.log)
+  },
+  handleElementLoad() {
+    this.setData({
+      elementLoaded: true
+    })
+  },
   drawImage(ctx) {
-    const {
-      elementSize,
-      elementPosition,
-      elementRoate
-    } = this.data
     this.drawAvatar(ctx).then(() => {
-        ctx.save()
-        ctx.translate(elementPosition.left + (elementSize.width / 2), elementPosition.top + (elementSize.height / 2))
-        ctx.rotate(elementRoate * Math.PI / 180)
-        ctx.drawImage(hatPath, -elementSize.width / 2, -elementSize.height / 2, elementSize.width, elementSize.height)
-        ctx.restore()
+        this.drawElement(ctx)
         ctx.draw(false, () => {
           this.saveImg()
         })
       })
       .catch(err => console.log(err))
+  },
+  drawElement(ctx) {
+    const width = this.elementWidth
+    const height = this.elementHeight
+    ctx.save()
+    ctx.translate(this.elementX + (width / 2), this.elementY + (height / 2))
+    ctx.rotate(this.data.elementRoate * Math.PI / 180)
+    ctx.drawImage(hatPath, -width / 2, -height / 2, width, height)
+    ctx.restore()
   },
   drawAvatar(ctx) {
     return drawImagePromise(userAvatar, ctx)
@@ -153,8 +171,8 @@ Page({
     })
   },
   handleRotate(e) {
-    const centerX = this.data.elementPosition.left + (this.data.elementSize.width / 2)
-    const centerY = this.data.elementPosition.top + (this.data.elementSize.height / 2)
+    const centerX = this.elementX + (this.data.elementDefaultSize.width / 2)
+    const centerY = this.elementY + (this.data.elementDefaultSize.height / 2)
 
     const diffXBefore = this.rotateStartX - centerX
     const diffYBefore = this.rotateStartY - centerY
@@ -179,6 +197,11 @@ Page({
     elementRoateTemp = this.data.elementRoate
   },
   handleSave() {
+    wx.showLoading({
+      title: '稍等...',
+    })
+    this.elementWidth = this.data.elementDefaultSize.width * this.elementScale
+    this.elementHeight = this.data.elementDefaultSize.height * this.elementScale
     this.drawImage(mainPhotoCtx)
   },
   saveImg() {
@@ -206,29 +229,10 @@ Page({
     })
   },
   setElementPosition(x, y) {
-    this.setData({
-      'elementPosition.left': x,
-      'elementPosition.top': y
-    })
+    this.elementX = x
+    this.elementY = y
   },
-  // handleResize(e) {
-  //   const diffX = e.touches[0].clientX - this.resizeStartX
-  //   const diffWidth = this.data.elementSize.width + diffX
-  //   const scale = diffWidth / this.data.elementSize.width
-  //   console.log(scale)
-  //   this.setData({
-  //     elementScale: scale
-  //   })
-  // },
-  // handleResizeStart(e) {
-  //   this.isResizing = true
-  //   this.resizeStartX = e.touches[0].clientX
-  // },
-  // handleResizeEnd() {
-  //   this.isResizing = false
-  //   this.setData({
-  //     'elementSize.width': this.data.elementSize.width * this.data.elementScale,
-  //     'elementSize.height': this.data.elementSize.height * this.data.elementScale
-  //   })
-  // }
+  handleScale(e) {
+    this.elementScale = e.detail.scale
+  }
 })
