@@ -59,6 +59,6 @@ button.to-goods-list-btn{
   align-items: center;
   justify-content: center;
   border: none;
-  background: lightblue;
+  background: darkblue;
   color: #fff;
 }
