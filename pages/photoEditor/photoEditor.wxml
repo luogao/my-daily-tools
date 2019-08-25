@@ -1,9 +1,9 @@
-<view>
-  <view class='user-avatar-image-wrapper'>
-    <image src='{{userAvatar}}' class='user-avatar-image'></image>
+<view class="photo-editor-wrapper">
+  <view class='user-avatar-image-wrapper' style='background-color:{{borderColorList[borderColorActiveIndex]}}'>
+    <image style='transform: scale({{selectImage.scale}})' src='{{selectImage.url}}' class='user-avatar-image' mode='aspectFit'></image>
   </view>
-  <canvas class='main-photo' canvas-id='main-photo' style='width: {{mainPhotoSize}}px;height: {{mainPhotoSize}}px'></canvas>
-  <movable-area 
+  <canvas class='main-photo' canvas-id='main-photo' style='width: {{mainPhotoWidth}}px;height: {{mainPhotoHeight}}px'></canvas>
+  <!-- <movable-area 
     class='editor-area' 
     catchtap='handleElementNotActive'>
     <movable-view 
@@ -31,23 +31,32 @@
         >
           <image src='../../images/rotate-icon.png'></image>
         </view>
-        <!-- <view
+        <view
           class='resize-btn' 
           catchtouchmove='handleResize'
           catchtouchstart='handleResizeStart'
           catchtouchend='handleResizeEnd'
         >
           <image src='../../images/resize-icon.svg'></image>
-        </view> -->
+        </view>
         <image bindload='handleElementLoad' class='hat-image' src='../../images/christmas-hat-1.png'></image>
       </view>
     </movable-view>
-  </movable-area>
+  </movable-area> -->
+  <slider backgroundColor="#eee" activeColor="#eee" step="0.01" min='0' max='0.5' bindchanging="handleSliderChange" class='scale-slider' wx:if="{{selectImage.url}}" />
 
+  <view class='border-color-selector'>
+    <view data-index='{{index}}' bindtap="handleColorChange" class='color-item {{item === "black" ? "is-black" : ""}} {{borderColorActiveIndex === index? "active" : ""}}' wx:for="{{borderColorList}}" wx:key style='border-color:{{item}};color:{{item}}'>
+      <view class='color-item-before ' style='background-color:{{item}};'></view>
+    </view>
+  </view>
 
   <view class='actions-wrapper'>
-    <button hover-class='btn-hover' class='save-btn' plain bindtap='handleSave'>
+    <button hover-class='btn-hover' class='action-btn' plain bindtap='handleSave' disabled="{{!selectImage.url}}">
       保存
+    </button>
+    <button hover-class='btn-hover' class='action-btn' plain bindtap='handleUpload'>
+      上传
     </button>
   </view>
 </view>

@@ -12,6 +12,7 @@ const MAINPHOTOID = 'main-photo'
 const mainPhotoCtx = wx.createCanvasContext(MAINPHOTOID)
 const screenWidth = wx.getSystemInfoSync().screenWidth
 const RPX = screenWidth / REFERENCESCREENSIZE
+
 const ININELEMENTSTYLE = {
   width: 100,
   height: 100,
@@ -30,10 +31,24 @@ const hatPath = '../../images/christmas-hat-1.png'
 let isDrag = false
 
 const
-  drawImagePromise = (path, ctx) => {
+  drawImagePromise = (path, ctx, scale = 1) => {
     return new Promise((resolve, reject) => {
       getImageInfo(path).then(res => {
-        ctx.drawImage(res.path, 0, 0, screenWidth, screenWidth)
+        console.log(res)
+        const imageWidth = res.width
+        const imageHeight = res.height
+        const imageScale = imageWidth / imageHeight
+
+
+        const screenImageScale = screenWidth / imageHeight * scale
+        const afterHeight = imageHeight * imageScale
+        const afterWidth = screenWidth * scale
+
+
+
+        ctx.save()
+        ctx.drawImage(res.path, 0, 0, afterWidth, afterHeight)
+        ctx.restore()
         resolve()
       }).catch(err => {
         reject(err)
@@ -47,6 +62,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    mainPhotoWidth: 0,
+    mainPhotoHeight: 0,
     mainPhotoSize: screenWidth,
     elementActive: true,
     elementDefaultSize: {
@@ -61,7 +78,13 @@ Page({
     elementTemp: 0,
     userAvatar,
     hasElementData: false,
-    elementLoaded: false
+    elementLoaded: false,
+    selectImage: {
+      url: '',
+      scale: 1
+    },
+    borderColorList: ['#fff', 'black', '#c8c8c8', '#8c8c8c', '#fecd00', '#f48021', '#fe5f03', '#80d381', '#44b244', '#007000', '#72c5d5', '#1e71d8', '#2000ff', '#96398e', '#ffadba', '#ff4d4c', '#ff3400'],
+    borderColorActiveIndex: 0
   },
 
   /**
@@ -128,86 +151,55 @@ Page({
       elementLoaded: true
     })
   },
-  drawImage(ctx) {
-    this.drawAvatar(ctx).then(() => {
-        this.drawElement(ctx)
-        ctx.draw(false, () => {
-          this.saveImg()
-        })
-      })
-      .catch(err => console.log(err))
+  async drawImage(ctx) {
+    await this.drawMainImage(ctx)
+    ctx.draw(false, () => {
+
+      this.saveImg(ctx)
+    })
   },
-  drawElement(ctx) {
-    const width = this.elementWidth
-    const height = this.elementHeight
+  async drawMainImage(ctx) {
+    const imageRes = await getImageInfo(this.data.selectImage.url)
+    const size = Math.max(imageRes.width, imageRes.height)
+    const fillStyle = this.data.borderColorList[this.data.borderColorActiveIndex]
+    let x1 = 0
+    let y1 = 0
+    let x2 = imageRes.width
+    let y2 = imageRes.height
+    if (size === imageRes.width) {
+      y1 = (size - imageRes.height) / 2
+    } else {
+      x1 = (size - imageRes.width) / 2
+    }
+
+    this.setData({
+      mainPhotoWidth: size,
+      mainPhotoHeight: size
+    })
     ctx.save()
-    ctx.translate(this.elementX + (width / 2), this.elementY + (height / 2))
-    ctx.rotate(this.data.elementRoate * Math.PI / 180)
-    ctx.drawImage(hatPath, -width / 2, -height / 2, width, height)
+    ctx.setFillStyle(fillStyle)
+    ctx.fillRect(0, 0, size, size)
+    ctx.translate(size / 2, size / 2)
+    ctx.scale(this.data.selectImage.scale, this.data.selectImage.scale)
+    ctx.drawImage(imageRes.path, x1 - size / 2, y1 - size / 2, x2, y2)
     ctx.restore()
   },
-  drawAvatar(ctx) {
-    return drawImagePromise(userAvatar, ctx)
+  drawBackgroundImage(ctx) {
+    return drawImagePromise(this.data.selectImage.url, ctx, this.data.selectImage.scale)
   },
-  drawHat(ctx) {
-    return drawImagePromise(hatPath, ctx)
-  },
-  onElementChange(e) {
-    if (!this.data.elementActive) {
-      this.setData({
-        elementActive: true
-      })
-    }
-    this.setElementPosition(e.detail.x, e.detail.y)
-  },
-  handleElementNotActive() {
-    this.setData({
-      elementActive: false
-    })
-  },
-  handleElementActive() {
-    this.setData({
-      elementActive: true
-    })
-  },
-  handleRotate(e) {
-    const centerX = this.elementX + (this.data.elementDefaultSize.width / 2)
-    const centerY = this.elementY + (this.data.elementDefaultSize.height / 2)
 
-    const diffXBefore = this.rotateStartX - centerX
-    const diffYBefore = this.rotateStartY - centerY
-
-    const diffXAfter = e.touches[0].clientX - centerX
-    const diffYAfter = e.touches[0].clientY - centerY
-
-    const angleBefore = Math.atan2(diffYBefore, diffXBefore) / Math.PI * 180
-    const angleAfter = Math.atan2(diffYAfter, diffXAfter) / Math.PI * 180
-
-    this.setData({
-      elementRoate: elementRoateTemp + angleAfter - angleBefore
-    })
-  },
-  handleRotateStart(e) {
-    this.rotateStartX = e.touches[0].clientX
-    this.rotateStartY = e.touches[0].clientY
-    this.isRotating = true
-  },
-  handleRotateEnd() {
-    this.isRotating = false
-    elementRoateTemp = this.data.elementRoate
-  },
   handleSave() {
     wx.showLoading({
       title: '稍等...',
     })
-    this.elementWidth = this.data.elementDefaultSize.width * this.elementScale
-    this.elementHeight = this.data.elementDefaultSize.height * this.elementScale
+
     this.drawImage(mainPhotoCtx)
   },
-  saveImg() {
+  saveImg(ctx) {
+    let size = Math.max(this.data.mainPhotoHeight, this.data.mainPhotoWidth)
     wx.canvasToTempFilePath({
-      destWidth: screenWidth * 2,
-      destHeight: screenWidth * 2,
+      destWidth: size * 0.5,
+      destHeight: size * 0.5,
       canvasId: MAINPHOTOID,
       success(res) {
         wx.saveImageToPhotosAlbum({
@@ -223,16 +215,41 @@ Page({
               icon: 'none',
               title: '保存失败',
             })
+          },
+          complete() {
+            wx.hideLoading()
+            ctx.clearRect(0, 0, size, size)
           }
         })
       }
     })
   },
-  setElementPosition(x, y) {
-    this.elementX = x
-    this.elementY = y
+  handleUpload() {
+    const self = this
+    wx.chooseImage({
+      count: 1,
+      success(res) {
+        self.setData({
+          selectImage: {
+            ...self.data.selectImage,
+            url: res.tempFilePaths[0]
+          }
+        })
+      }
+    })
   },
-  handleScale(e) {
-    this.elementScale = e.detail.scale
+  handleSliderChange(e) {
+    this.setData({
+      selectImage: {
+        ...this.data.selectImage,
+        scale: 1 - e.detail.value
+      }
+    })
+  },
+  handleColorChange(e) {
+    const index = e.currentTarget.dataset.index
+    this.setData({
+      borderColorActiveIndex: index
+    })
   }
 })

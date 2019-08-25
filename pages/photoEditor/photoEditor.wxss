@@ -1,5 +1,10 @@
 /* pages/photoEditor/photoEditor.wxss */
 
+.photo-editor-wrapper {
+  background: #000;
+  height: 100vh;
+}
+
 .editor-area {
   width: 100vw;
   height: 100vw;
@@ -73,6 +78,7 @@
 .user-avatar-image-wrapper {
   width: 100vw;
   height: 100vw;
+  background: #fff;
 }
 
 .user-avatar-image {
@@ -89,23 +95,28 @@
 
 .actions-wrapper {
   margin-top: 100rpx;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 90rpx;
 }
 
-button.save-btn {
-  width: 300rpx;
-  height: 100rpx;
-  margin: 0 auto;
+button.action-btn {
+  width: 200rpx;
+  height: 66rpx;
   display: flex;
+  font-size: 32rpx;
+  font-weight: 300;
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 5px -3px #333;
-  border-color: #aaa;
+  background: #fff;
+  border-radius: 0;
+  border: none;
 }
 
 button.btn-hover {
   box-shadow: none;
   transform: translateY(3px) scale(0.98, 0.98);
-  
 }
 
 .main-photo {
@@ -114,3 +125,55 @@ button.btn-hover {
   top: -9999999px;
   left: -99999999px;
 }
+
+.scale-slider {
+  margin: 0;
+  padding: 0 90rpx;
+  margin-top: 60rpx;
+}
+
+.border-color-selector {
+  padding: 30rpx 90rpx;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: auto;
+  align-items: center;
+}
+
+.border-color-selector .color-item {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+  background: #000;
+  display: flex;
+  position: relative;
+  border: 4rpx solid transparent !important;
+  flex-shrink: 0;
+}
+
+.border-color-selector .color-item.active {
+  border: 4rpx solid currentColor !important;
+}
+
+.color-item .color-item-before {
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.color-item.is-black .color-item-before {
+  border: 2rpx solid #fff;
+}
+
+.color-item.is-black.active {
+  border: 4rpx solid #fff !important;
+}
+/* 
+.color-item.is-black.active .color-item-before{
+  border: none;
+} */

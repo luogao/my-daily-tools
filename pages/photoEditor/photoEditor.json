@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "图片编辑",
-  "disableScroll": false
+  "disableScroll": true,
+  "navigationBarBackgroundColor": "#000",
+  "navigationBarTextStyle": "white"
 }
