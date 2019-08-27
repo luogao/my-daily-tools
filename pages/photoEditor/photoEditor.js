@@ -24,8 +24,6 @@ let beforeRotateX = 200
 let beforeRotateY = 200
 let elementRoateTemp = 0
 
-const userAvatar = 'https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoUmVMortCC1Oia8pIbH3icsyMJ42qMHLQnSsqaTx7UgByT6uuPh0c5gx28l7PwwU5zxibGzaSRDem1Q/0'
-
 const hatPath = '../../images/christmas-hat-1.png'
 
 let isDrag = false
@@ -76,7 +74,6 @@ Page({
     },
     elementRoate: 0,
     elementTemp: 0,
-    userAvatar,
     hasElementData: false,
     elementLoaded: false,
     selectImage: {
@@ -154,8 +151,9 @@ Page({
   async drawImage(ctx) {
     await this.drawMainImage(ctx)
     ctx.draw(false, () => {
-
-      this.saveImg(ctx)
+      setTimeout(() => {
+        this.saveImg(ctx)
+      })
     })
   },
   async drawMainImage(ctx) {
@@ -198,13 +196,16 @@ Page({
   saveImg(ctx) {
     let size = Math.max(this.data.mainPhotoHeight, this.data.mainPhotoWidth)
     wx.canvasToTempFilePath({
-      destWidth: size * 0.5,
-      destHeight: size * 0.5,
+      // destWidth: size * 0.5,
+      // destHeight: size * 0.5,
+      quality: 1,
       canvasId: MAINPHOTOID,
       success(res) {
+        console.log(res)
         wx.saveImageToPhotosAlbum({
           filePath: res.tempFilePath,
           success(res) {
+            console.log(res)
             wx.showToast({
               title: '保存成功',
             })
@@ -220,6 +221,13 @@ Page({
             wx.hideLoading()
             ctx.clearRect(0, 0, size, size)
           }
+        })
+      },
+      fail(err) {
+        console.log(err)
+        wx.showToast({
+          icon: 'none',
+          title: '保存失败',
         })
       }
     })
