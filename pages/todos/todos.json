@@ -1,6 +1,6 @@
 {
   "enablePullDownRefresh": false,
-  "navigationBarTitleText": "Todos",
+  "navigationBarTitleText": "不要忘记做这些",
   "usingComponents": {
     "todolist": "/components/todolist/todolist"
   },

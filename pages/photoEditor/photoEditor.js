@@ -236,6 +236,7 @@ Page({
     const self = this
     wx.chooseImage({
       count: 1,
+      sizeType: ['compressed'],
       success(res) {
         self.setData({
           selectImage: {

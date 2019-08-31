@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "物品记录",
+  "navigationBarTitleText": "看看哪些改扔了",
   "usingComponents": {
     "goods-item": "/components/goodsItem/goodsItem"
   }

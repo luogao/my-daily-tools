@@ -22,20 +22,21 @@
   box-sizing: border-box;
   padding: 20rpx;
   margin: 20rpx 0;
-  border-radius: 10rpx;
   box-shadow: 0 4rpx 8rpx rgba(136, 136, 136, 0.43);
   transition: all 0.1s;
   position: relative;
-  border-top-width: 25rpx;
+  border-top-width: 30rpx;
   border-top-style: solid;
+  background: #fff;
+  border-radius: 0;
 }
 
 .list-item.finish {
-  border-top-color: #63d47a;
+  border-color: #63d47a;
 }
 
 .list-item.not-finish {
-  border-top-color: #ff0302;
+  border-color: #ff0602;
 }
 
 .list-item .item-title {

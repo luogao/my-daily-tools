@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="container">
-  <swiper current="{{currentPage}}" bindanimationfinish='swiperChangeHandler' indicator-dots="{{listData.finished.length > 0}}" duration="500">
+  <swiper current="{{currentPage}}" bindanimationfinish='swiperChangeHandler' indicator-dots="{{listData.finished.length > 0}}" duration="300">
     <swiper-item>
       <view class='todos-no-data' wx:if="{{!listData.notFinished.length}}">
         <view>No Data</view>

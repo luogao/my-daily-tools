@@ -5,7 +5,7 @@
       <block wx:if="{{dataLoaded}}">
         <block wx:if="{{!isNeedUpdate}}">
           <text>{{userName}}</text>
-          <image class='user-avatar' wx:if="{{userName}}" mode="aspectFit" src="{{avatar}}"></image>
+          <image bindtap="handleAvatarTap" class='user-avatar' wx:if="{{userName}}" mode="aspectFit" src="{{avatar}}"></image>
         </block>
         <block wx:else>
           <button class='default-avatar-btn' open-type='getUserInfo' bindgetuserinfo='handleGetUserInfo' plain>
@@ -17,7 +17,7 @@
       <text wx:else>Loading...</text>
     </view>
     <view class="location-block {{curLocation? 'hasdata': ''}}">
-      <image mode="widthFix" src="../../images/location.svg"></image>
+      <image bindtap="getCurLocation" class='location-block-icon' mode="widthFix" src="../../images/location.svg"></image>
       <text bindtap="getCurLocation" class="location-info one-line">{{curLocation? curLocation.name:'点击获取当前位置'}}</text>
       <view class="action-block" wx:if="{{curLocation}}">
         <button bindtap="clearCurLoction" plain class="delete-btn" size="mini">

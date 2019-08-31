@@ -46,19 +46,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 0;
+}
+
+.action-btn-group button:disabled {
+  background-color: none !important;
 }
 
 .has-result {
   font-weight: 500;
 }
 
-button.to-goods-list-btn{
+button.to-goods-list-btn {
   margin: 60rpx 4% 0;
   height: 100rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: none;
-  background: darkblue;
-  color: #fff;
+  border: 1px solid #7475c6;
+  color: #7475c6;
+  border-radius: 0;
 }

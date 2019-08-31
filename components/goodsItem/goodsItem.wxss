@@ -25,7 +25,7 @@
 
 .goods-item-name {
   font-size: 48rpx;
-  font-weight: 300;
+  font-weight: 400;
   max-width: 520rpx;
   text-overflow: ellipsis;
   white-space: nowrap;

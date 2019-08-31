@@ -10,7 +10,7 @@ button.to-shelflife-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: none;
-  background: #80e7c1;
-  color: #fff;
+  color: #80e7c1;
+  border-radius: 0;
+  border: 1px solid currentColor;
 }

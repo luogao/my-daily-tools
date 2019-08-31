@@ -17,6 +17,15 @@ Page({
     this.setData({
       currentPage: res.detail.current
     })
+    if (res.detail.current === 0) {
+      wx.setNavigationBarTitle({
+        title: '不要忘记做这些'
+      })
+    } else {
+      wx.setNavigationBarTitle({
+        title: '都完成了，太棒了！'
+      })
+    }
   },
   //事件处理函数
   itemClickHandler: function(e) {

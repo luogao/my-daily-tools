@@ -31,10 +31,20 @@ Page({
       this.updateUserInfo(res.detail.userInfo)
     }
   },
+  logOut() {
+    this.setData({
+      userName: '',
+      avatar: '',
+      isNeedUpdate: true
+    })
+  },
   login() {
     const self = this
     AV.User.loginWithWeapp().then(user => {
       const _user = user.toJSON()
+      console.log({
+        _user
+      })
       self.setData({
         userName: _user.nickName ? _user.nickName : '',
         avatar: _user.avatarUrl ? _user.avatarUrl : '',
@@ -53,6 +63,10 @@ Page({
       mask: true
     })
     const user = AV.User.current();
+    if (!user) {
+      wx.hideLoading()
+      return
+    }
     // 更新当前用户的信息
     user.set(userInfo).save().then(res => {
       console.log(res)
@@ -122,5 +136,21 @@ Page({
     this.setData({
       curLocation: ''
     })
-  }
+  },
+  handleAvatarTap() {
+    const self = this
+    wx.showActionSheet({
+      itemList: ['退出登录'],
+      success(res) {
+        switch (res.tapIndex) {
+          case 0:
+            self.logOut()
+            break;
+        }
+      },
+      fail(res) {
+        console.log(res.errMsg)
+      }
+    })
+  },
 })

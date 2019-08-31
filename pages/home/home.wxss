@@ -57,7 +57,6 @@ button.default-avatar-btn {
 .tool-block-item {
   width: 260rpx;
   height: 260rpx;
-  border-radius: 8px;
   box-shadow: 0rpx 10px 40px -10px rgba(0, 64, 128, 0.2);
   margin-bottom: 100rpx;
   padding: 40rpx;
@@ -86,14 +85,13 @@ button.default-avatar-btn {
 .location-block.hasdata image {
   transition: all 0.3s ease;
   filter: none;
-  opacity: 1;
 }
 
-.location-block>image {
+.location-block .location-block-icon {
   width: 60rpx;
+  height: 56rpx;
   transition: all 0.3s ease;
   filter: grayscale(100%);
-  opacity: 1;
 }
 
 .action-block {
@@ -111,6 +109,7 @@ button.default-avatar-btn {
 
 .action-block .delete-btn image {
   width: 40rpx;
+  height: 40rpx;
 }
 
 @keyframes pulse {
