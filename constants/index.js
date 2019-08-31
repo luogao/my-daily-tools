@@ -13,7 +13,7 @@ export const ROUTECONFIG = [{
 }, {
   imgSrc: '../../images/photo-editor-icon.svg',
   page: 'photoEditor',
-  bgColor: '#ffe5e1'
+  bgColor: '#ffe5d9'
 }]
 
 export const REFERENCESCREENSIZE = 375

@@ -94,7 +94,7 @@
 }
 
 .actions-wrapper {
-  margin-top: 100rpx;
+  margin-top: 90rpx;
   display: flex;
   justify-content: space-between;
   padding: 0 90rpx;
@@ -102,16 +102,21 @@
 
 button.action-btn {
   width: 200rpx;
-  height: 66rpx;
+  height: 88rpx;
   display: flex;
   font-size: 32rpx;
   font-weight: 300;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 5px -3px #333;
-  background: #fff;
+  /* box-shadow: 0 4px 5px -3px #fff; */
+  color: #eee;
+  border: 1px solid #fff;
+  /* background: #fff; */
   border-radius: 0;
-  border: none;
+}
+
+button.action-btn.is-single{
+  width: 100%;
 }
 
 button.btn-hover {
@@ -134,10 +139,11 @@ button.btn-hover {
 
 .border-color-selector {
   padding: 30rpx 90rpx;
-  display: flex;
-  flex-wrap: nowrap;
+}
+
+.color-item-wrapper {
   overflow: auto;
-  align-items: center;
+  white-space: nowrap;
 }
 
 .border-color-selector .color-item {
@@ -146,10 +152,10 @@ button.btn-hover {
   border-radius: 50%;
   margin-right: 20rpx;
   background: #000;
-  display: flex;
   position: relative;
   border: 4rpx solid transparent !important;
   flex-shrink: 0;
+  display: inline-flex;
 }
 
 .border-color-selector .color-item.active {

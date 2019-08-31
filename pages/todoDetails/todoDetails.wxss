@@ -62,7 +62,7 @@ button.done-btn, button.delete-btn {
   font-size: 36rpx;
   border: 0px;
   box-shadow: 4rpx 16rpx 40rpx 0 rgba(31, 32, 68, 0.25);
-  transform: translate3d(calc(100vw - 100% - 40rpx), calc(100vh - 100% - 40rpx), 0);
+  transform: translate3d(calc(100vw - 100% - 40rpx), calc(100vh - 100% - 160rpx), 0);
   margin: 0;
   transition: top .3s,box-shadow .3s;
 }

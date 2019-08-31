@@ -46,16 +46,18 @@
   <slider backgroundColor="#eee" activeColor="#eee" step="0.01" min='0' max='0.5' bindchanging="handleSliderChange" class='scale-slider' wx:if="{{selectImage.url}}" />
 
   <view class='border-color-selector'>
-    <view data-index='{{index}}' bindtap="handleColorChange" class='color-item {{item === "black" ? "is-black" : ""}} {{borderColorActiveIndex === index? "active" : ""}}' wx:for="{{borderColorList}}" wx:key style='border-color:{{item}};color:{{item}}'>
-      <view class='color-item-before ' style='background-color:{{item}};'></view>
+    <view class='color-item-wrapper'>
+      <view data-index='{{index}}' bindtap="handleColorChange" class='color-item {{item === "black" ? "is-black" : ""}} {{borderColorActiveIndex === index? "active" : ""}}' wx:for="{{borderColorList}}" wx:key style='border-color:{{item}};color:{{item}}'>
+        <view class='color-item-before ' style='background-color:{{item}};'></view>
+      </view>
     </view>
   </view>
 
   <view class='actions-wrapper'>
-    <button hover-class='btn-hover' class='action-btn' plain bindtap='handleSave' disabled="{{!selectImage.url}}">
+    <button hover-class='btn-hover' class='action-btn' plain bindtap='handleSave' wx:if="{{selectImage.url}}">
       保存
     </button>
-    <button hover-class='btn-hover' class='action-btn' plain bindtap='handleUpload'>
+    <button hover-class='btn-hover' class='action-btn {{!selectImage.url ? "is-single" : ""}}' plain bindtap='handleUpload'>
       上传
     </button>
   </view>

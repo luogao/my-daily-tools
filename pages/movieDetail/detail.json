@@ -1,3 +1,4 @@
 {
-  "backgroundColor": "#000"
+  "backgroundColor": "#000",
+  "navigationBarTitleText": "电影详情"
 }

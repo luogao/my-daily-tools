@@ -3,5 +3,6 @@
   "navigationBarTitleText": "Todos",
   "usingComponents": {
     "todolist": "/components/todolist/todolist"
-  }
+  },
+  "disableScroll": true
 }
