@@ -2,6 +2,6 @@
   <view class='goods-list'>
     <goods-item goods="{{item}}" wx:key wx:for="{{listData}}"></goods-item>
   </view>
-  <button bindtap='gotoshelflife' class='to-shelflife-btn' plain hover-class='my-hover-class'>继续添加</button>
+  <button bindtap='gotoshelflife' class='to-shelflife-btn' plain hover-class='my-hover-class'>{{listData.length > 0 ?"继续添加" : "拿一包薯片算算它的保质期吧！" }}</button>
   
 </view>

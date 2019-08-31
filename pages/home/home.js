@@ -42,9 +42,6 @@ Page({
     const self = this
     AV.User.loginWithWeapp().then(user => {
       const _user = user.toJSON()
-      console.log({
-        _user
-      })
       self.setData({
         userName: _user.nickName ? _user.nickName : '',
         avatar: _user.avatarUrl ? _user.avatarUrl : '',
@@ -109,6 +106,13 @@ Page({
     const {
       page
     } = e.currentTarget.dataset
+    if (!this.data.userName) {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'none'
+      })
+      return
+    }
     const _url = `../${page}/${page}`
     wx.navigateTo({
       url: _url
